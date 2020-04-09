@@ -46,7 +46,7 @@
             <div class="flex">
               <input-facade mask="#### #### #### ####" type="text" v-model="values.number" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="XXXX XXXX XXXX XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
               <!-- interactive credit card icon changer -->
-              <!-- <img v-if="values.number.length > 10" class="-ml-16 h-8 z-10 mt-3 fill-current text-red-700" :src="require(`payment-icons/min/mono/${cardType.icon}.svg`)" alt=""/> -->
+              <img v-if="values.number.length > 10" class="-ml-16 h-8 z-10 mt-3 fill-current text-red-700" :src="require(`payment-icons/min/mono/${cardType.icon}.svg`)" alt=""/>
             </div>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
@@ -299,7 +299,9 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      this.$emit('next');
+      if (this.englishProficient && this.termsOfService && !this.loading){
+        this.$emit('next');
+      }
     },
     back: function (){
       this.$emit('back');

@@ -127,11 +127,13 @@ export default {
     next: function(event) {
       if(this.currentForm <= 4){
         this.currentForm++;
+        this.$emit('changeForm', this.currentForm);
       }
     },
     back: function(event) {
       if(this.currentForm > 1){
         this.currentForm--;
+        this.$emit('changeForm', this.currentForm);
       }
     },
     submit: function(event) {
@@ -253,7 +255,7 @@ export default {
   },
   data: function() {
     return {
-      currentForm: 1,
+      currentForm: 4,
       loading: false,
       error: {
         status: false,
@@ -278,10 +280,10 @@ export default {
           ssn: '1234'
         },
         form3:{
-          address: '',
-          city: '',
-          state: '',
-          zip: ''
+          address: '12340 Santa Monica Boulevard',
+          city: 'Los Angeles',
+          state: 'CA',
+          zip: '90025'
         },
         form4:{
           payFull: false,
@@ -312,12 +314,12 @@ export default {
   },
   mounted: function() {
     // add the google api key for the maps
-      const script = document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
-      document.querySelector('head').appendChild(script);
-    }
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
+    document.querySelector('head').appendChild(script);
+  }
 
 }
 </script>

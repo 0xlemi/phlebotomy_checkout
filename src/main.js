@@ -6,6 +6,10 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+// Third Party Libraries
+window.axios = require('axios');
+
+
 new Vue({
   router,
   store,
