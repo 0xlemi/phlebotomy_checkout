@@ -1,32 +1,36 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="bg-gray-200" id="app">
+    <div class="flex flex-col justify-between max-w-5xl mx-auto" id="app">
+
+      <div id="nav">
+        <nav-bar></nav-bar>
+      </div>
+
+      <div class="mb-auto bg-white">
+        <router-view/>
+      </div>
+
+      <div id="footer">
+        <v-footer></v-footer>
+      </div>
+
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
+<script>
+import NavBar from '@/components/Layout/NavBar.vue';
+import VFooter from '@/components/Layout/VFooter.vue';
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+export default {
+  components: {
+    NavBar,
+    VFooter
   }
 }
-</style>
+
+</script>
+
+<style src="@/assets/tailwind.css">
