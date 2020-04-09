@@ -138,7 +138,7 @@ export default {
     },
     submit: function(event) {
       this.loading = true;
-      axios.post('http://admin.phlebs.com/api/registration/process', {
+      axios.post('https://admin.phlebs.com/api/registration/process', {
         payment: {
           amount: this.values.form4.payFull ? this.totalPrice : 250,
           payment_type: "card",
