@@ -270,12 +270,12 @@ export default {
           english_test: true
         },
         form2:{
-          name: '',
-          last_name: '',
-          email: '',
-          number: '',
-          dob: '',
-          ssn: ''
+          name: 'Pepe',
+          last_name: 'Gonzalez',
+          email: 'pepe@example.com',
+          number: '8792348709',
+          dob: '03221993',
+          ssn: '1234'
         },
         form3:{
           address: '',
@@ -285,10 +285,10 @@ export default {
         },
         form4:{
           payFull: false,
-          name: '',
-          number: '',
-          exp: '',
-          code: '',
+          name: 'Name Card',
+          number: '2345234523452345',
+          exp: '0622',
+          code: '240',
           type: '',
           same_billing: "true", // Is easier to use a string for radio buttons
           billing_address: {
@@ -309,7 +309,15 @@ export default {
         city: ''
       }
     }
-  }
+  },
+  mounted: function() {
+    // add the google api key for the maps
+      const script = document.createElement('script');
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
+      document.querySelector('head').appendChild(script);
+    }
 
 }
 </script>

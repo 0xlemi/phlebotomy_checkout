@@ -36,7 +36,7 @@
           </label>
 
           <validation-provider name="city" rules="required" v-slot="{ errors }">
-            <input type="text" v-model="values.city" state class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="values.city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -152,6 +152,8 @@ export default {
     }
 }
 </script>
+
+
 
 <style scoped>
 </style>
