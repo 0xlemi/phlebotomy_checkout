@@ -11,15 +11,15 @@
     <tbody>
       <tr>
         <td class="border px-4 py-2">San Diego National Phlebotomy May Day Class</td>
-        <td class="border px-4 py-2">{{ values.course }}</td>
+        <td class="border px-4 py-2">{{ courseCost }}</td>
       </tr>
       <tr class="">
         <td class="border px-4 py-2">Exam Fee</td>
-        <td class="border px-4 py-2">{{ values.exam_fee }}</td>
+        <td class="border px-4 py-2">{{ examFee }}</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">Insurance</td>
-        <td class="border px-4 py-2">{{ values.insurance }}</td>
+        <td class="border px-4 py-2">{{ insurance }}</td>
       </tr>
 
       <tr :class="[ payFull ? 'text-gray-800 font-semibold': 'line-through text-gray-600' ]" class="bg-gray-100">
@@ -28,7 +28,7 @@
       </tr>
       <tr v-if="!payFull" class="bg-gray-100 text-gray-800 font-semibold">
         <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(deposit)</span></td>
-        <td class="border px-4 py-2">250</td>
+        <td class="border px-4 py-2">{{ deposit }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-blue-100 text-blue-800 font-semibold">
         <td class="border px-4 py-2">Remaining Balance</td>
@@ -42,16 +42,19 @@
 <script>
 export default {
   props: {
-    values: Object,
+    courseCost: Number,
+    examFee: Number,
+    insurance: Number,
+    deposit: Number,
     payFull: Boolean
   },
   computed: {
     total: function () {
       // Just sum all the values inside the object
-      return Object.values(this.values).reduce((a, b) => a + b);
+      return this.courseCost + this.examFee + this.insurance + this.deposit;
     },
     remainingBalance: function() {
-      return this.total - 250;
+      return this.total - this.deposit;
     }
   },
 }

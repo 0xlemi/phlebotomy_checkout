@@ -52,10 +52,12 @@
       </div>
 
     </div>
-    <div v-else>
-      <h2 class="p-10 mb-32 text-2xl text-red-900">
-        We couldn't find that course. Please try another one. Or call
+    <div v-else class="p-10 mb-32 text-2xl text-red-900">
+      <h2 class="mb-6">
+        We couldn't find that course.
       </h2>
+      <h3 class="text-xl">
+        Please try another one <a href="https://www.phlebotomyusa.com/phlebotomy-school-locations/" class="hover:text-blue-700 text-blue-500 underline font-bold">HERE</a>. Or call 888-531-8378</h3>
     </div>
 
   </div>
@@ -66,7 +68,7 @@
 
     <english-message class="p-8" v-if="!values.form1.english_test && currentForm == 1"></english-message>
 
-    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :values="coursePrice"></price-table>
+    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount"></price-table>
 
     <!-- Review Information Card -->
     <div v-if="currentForm > 2" :class="[ (currentForm == 5) ? ' pt-6' : 'py-4 pb-10']" class="px-5">
@@ -157,7 +159,7 @@ export default {
       this.loading = true;
       axios.post('https://admin.phlebs.com/api/registration/process', {
         payment: {
-          amount: this.values.form4.payFull ? this.totalPrice : 250,
+          amount: this.values.form4.payFull ? this.totalPrice : this.courseInfo.depositAmount,
           payment_type: "card",
           exam_payment: false, // Supose this comes form the server
           course_id: this.courseInfo.id, // Supose this comes from the server
@@ -259,7 +261,7 @@ export default {
       return false;
     },
     totalPrice: function() {
-      return Object.values(this.coursePrice).reduce((a, b) => a + b);
+      return this.courseInfo.courseCost + this.courseInfo.examFeeCost + this.courseInfo.insuranceCost;
     }
   },
   filters: {
@@ -289,35 +291,30 @@ export default {
         type: '',
         message: ''
       },
-      coursePrice:{ // This infoshould come from api request
-        course: 1995,
-        exam_fee: 120,
-        insurance: 25
-      },
       values: {
         form1:{
           english_test: true
         },
         form2:{
-          name: 'Pepe',
-          last_name: 'Gonzalez',
-          email: 'pepe@example.com',
-          number: '8792348709',
-          dob: '03221993',
-          ssn: '1234'
+          name: '',
+          last_name: '',
+          email: '',
+          number: '',
+          dob: '',
+          ssn: ''
         },
         form3:{
-          address: '12340 Santa Monica Boulevard',
-          city: 'Los Angeles',
-          state: 'CA',
-          zip: '90025'
+          address: '',
+          city: '',
+          state: '',
+          zip: ''
         },
         form4:{
           payFull: false,
-          name: 'Name Card',
-          number: '2345234523452345',
-          exp: '0622',
-          code: '240',
+          name: '',
+          number: '',
+          exp: '',
+          code: '',
           type: '',
           same_billing: "true", // Is easier to use a string for radio buttons
           billing_address: {
@@ -358,36 +355,40 @@ export default {
 
 
     // Make the request to get course information
-    axios.get('https://admin.phlebs.com/api/course/'+this.courseInfo.id)
-    .then((response) => {
-      if(response.data.success == true){
-        // Set all the information to
-        var data = response.data.course;
-        this.courseInfo.valid = "finished";
-        this.courseInfo.state = data.city.state.abbreviation;
-        this.courseInfo.agreement = data.enrollment_agreement;
-        this.courseInfo.courseCost = data.cost;
-        this.courseInfo.examFeeCost = data.exam_cost;
-        this.courseInfo.insuranceCost = data.insurance_cost;
-        this.courseInfo.depositAmount = data.deposit;
-      }
-      else{
-        // The course does not exist
+    if (this.courseInfo.id) {
+      axios.get('https://admin.phlebs.com/api/course/'+this.courseInfo.id)
+      .then((response) => {
+        if(response.data.success == true){
+          // Set all the information to
+          var data = response.data.course;
+          this.courseInfo.valid = "finished";
+          this.courseInfo.state = data.city.state.abbreviation;
+          this.courseInfo.agreement = data.enrollment_agreement;
+          this.courseInfo.courseCost = data.cost;
+          this.courseInfo.examFeeCost = data.exam_cost;
+          this.courseInfo.insuranceCost = data.insurance_cost;
+          this.courseInfo.depositAmount = data.deposit;
+        }
+        else{
+          // The course does not exist
+          this.courseInfo.valid = false;
+        }
+      })
+      .catch((error) => {
         this.courseInfo.valid = false;
-      }
-    })
-    .catch((error) => {
+        // Generice error telling to call and try again later
+          this.error = {
+            status: true,
+            type: 'Not Found',
+            message: 'There was an error, please call 888-531-8378 or try again another course.'
+          };
+          // go to the top of the screen so the user can see the error
+          window.scroll(0,0);
+          console.log(error);
+      });
+    }else {
       this.courseInfo.valid = false;
-      // Generice error telling to call and try again later
-        this.error = {
-          status: true,
-          type: 'Server',
-          message: 'Your course id having problems, please call 888-531-8378 or try again another course.'
-        };
-        // go to the top of the screen so the user can see the error
-        window.scroll(0,0);
-        console.log(error);
-    });
+    }
   }
 }
 </script>
