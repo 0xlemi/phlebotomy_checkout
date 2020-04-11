@@ -17,7 +17,7 @@
 
         <div class="flex-1 mx-6">
             <div class="flex justify-center my-3">
-              <!-- <shopper-approved></shopper-approved> -->
+              <shopper-approved></shopper-approved>
             </div>
         </div>
     </div>
@@ -31,12 +31,12 @@
 
 <script>
 
-// import ShopperApproved from './ShopperApproved.vue'
+import ShopperApproved from './ShopperApproved.vue'
 
 export default {
-  // components: {
-  //   'shopper-approved': ShopperApproved
-  // }
+  components: {
+    'shopper-approved': ShopperApproved
+  }
 
 }
 </script>
