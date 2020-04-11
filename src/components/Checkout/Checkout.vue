@@ -45,7 +45,7 @@
 
         <form-address v-if="currentForm == 3":values="values.form3" v-on:next="next" v-on:back="back" ></form-address>
 
-        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
+        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :termsOfServiceLink="courseInfo.termsOfServiceLink" v-on:back="back" ></form-payment>
 
         <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
 
@@ -68,7 +68,7 @@
 
     <english-message class="p-8" v-if="!values.form1.english_test && currentForm == 1"></english-message>
 
-    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount"></price-table>
+    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
 
     <!-- Review Information Card -->
     <div v-if="currentForm > 2" :class="[ (currentForm == 5) ? ' pt-6' : 'py-4 pb-10']" class="px-5">
@@ -277,8 +277,9 @@ export default {
       courseInfo: {
         valid: "loading",
         id: null,
+        name: null,
         state: null,
-        agreement: null,
+        termsOfServiceLink: null,
         courseCost: null,
         examFeeCost: null,
         insuranceCost: null,
@@ -362,8 +363,9 @@ export default {
           // Set all the information to
           var data = response.data.course;
           this.courseInfo.valid = "finished";
+          this.courseInfo.name = data.formatted_name;
           this.courseInfo.state = data.city.state.abbreviation;
-          this.courseInfo.agreement = data.enrollment_agreement;
+          this.courseInfo.termsOfServiceLink = data.enrollment_agreement;
           this.courseInfo.courseCost = data.cost;
           this.courseInfo.examFeeCost = data.exam_cost;
           this.courseInfo.insuranceCost = data.insurance_cost;

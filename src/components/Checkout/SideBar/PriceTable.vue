@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <tr>
-        <td class="border px-4 py-2">San Diego National Phlebotomy May Day Class</td>
+        <td class="border px-4 py-2">{{ courseName }}</td>
         <td class="border px-4 py-2">{{ courseCost }}</td>
       </tr>
       <tr class="">
@@ -46,6 +46,7 @@ export default {
     examFee: Number,
     insurance: Number,
     deposit: Number,
+    courseName: String,
     payFull: Boolean
   },
   computed: {

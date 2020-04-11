@@ -199,7 +199,7 @@
       <div class="mt-10">
         <label class="inline-flex">
           <input type="checkbox" v-model="termsOfService" class="focus:outline-red-100 form-checkbox text-red-700 h-5 w-5">
-          <span class="ml-2 text-red-900">I have read the <a class="hover:text-blue-700 text-blue-500 underline" target="_blank" href="https://admin.phlebotomyusa.com/agreement/san-diego/course/National">enrollment agreement and privacy policy</a> and agree to the terms listed therein.</span>
+          <span class="ml-2 text-red-900">I have read the <a class="hover:text-blue-700 text-blue-500 underline" target="_blank" :href="termsOfServiceLink">enrollment agreement and privacy policy</a> and agree to the terms listed therein.</span>
         </label>
       </div>
       <div class="mt-4">
@@ -246,7 +246,7 @@ import { MoonLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 setInteractionMode('passive');
 
 export default {
-  props: ['values', 'loading'],
+  props: ['values', 'loading', 'termsOfServiceLink'],
   components:{
     'input-facade': InputFacade,
     'card-button': CardButton,
