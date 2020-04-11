@@ -19,26 +19,43 @@
     </div>
     <!-- End Error -->
 
-    <progress-bar :step="currentForm" :number-steps="4" class="mx-8 my-6"></progress-bar>
 
 
-    <div class="mx-8 mt-8">
+    <!-- <div v-if="courseInfo.valid == 'loading'">
+      <h2 class="p-10 mb-40 text-2xl text-red-900">
+      We are Loading Your Checkout
+      </h2>
+    </div>
+    <div v-else-if="courseInfo.valid == 'finished'"> -->
+    <div v-if="courseInfo.valid">
 
-      <form-english v-if="currentForm == 1" :values="values.form1" v-on:next="next"></form-english>
+      <progress-bar :step="currentForm" :number-steps="4" class="mx-8 my-6"></progress-bar>
 
-      <div class="hidden lg:block h-56" v-if="currentForm == 1">
+
+      <div class="mx-8 mt-8">
+
+        <form-english v-if="currentForm == 1" :values="values.form1" v-on:next="next"></form-english>
+
+        <div class="hidden lg:block h-56" v-if="currentForm == 1">
+        </div>
+
+        <english-message class="lg:hidden p-8" color="red" v-if="!values.form1.english_test && currentForm == 1"></english-message>
+
+        <form-basic v-if="currentForm == 2" :values="values.form2" v-on:next="next" v-on:back="back" ></form-basic>
+
+        <form-address v-if="currentForm == 3":values="values.form3" v-on:next="next" v-on:back="back" ></form-address>
+
+        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
+
+        <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
+
       </div>
 
-      <english-message class="lg:hidden p-8" color="red" v-if="!values.form1.english_test && currentForm == 1"></english-message>
-
-      <form-basic v-if="currentForm == 2" :values="values.form2" v-on:next="next" v-on:back="back" ></form-basic>
-
-      <form-address v-if="currentForm == 3":values="values.form3" v-on:next="next" v-on:back="back" ></form-address>
-
-      <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
-
-      <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
-
+    </div>
+    <div v-else>
+      <h2 class="p-10 mb-32 text-2xl text-red-900">
+        We couldn't find that course. Please try another one. Or call
+      </h2>
     </div>
 
   </div>
@@ -143,7 +160,7 @@ export default {
           amount: this.values.form4.payFull ? this.totalPrice : 250,
           payment_type: "card",
           exam_payment: false, // Supose this comes form the server
-          course_id: "4451", // Supose this comes from the server
+          course_id: this.courseInfo.id, // Supose this comes from the server
           type: this.values.form4.payFull ? "full" : "deposit",
           website: "tmp.localhost"
         },
@@ -168,7 +185,7 @@ export default {
           name: this.values.form4.name,
           number: this.values.form4.number,
           expiration_month: this.exp ? this.exp[1] : '',
-          expiration_year: this.exp ? this.exp[2] : '',
+          expiration_year: this.exp ? '20'+this.exp[2] : '',
           code: this.values.form4.code,
           type: this.values.form4.type,
           same_billing: this.values.form4.same_billing,
@@ -255,7 +272,17 @@ export default {
   },
   data: function() {
     return {
-      currentForm: 4,
+      courseInfo: {
+        valid: "loading",
+        id: null,
+        state: null,
+        agreement: null,
+        courseCost: null,
+        examFeeCost: null,
+        insuranceCost: null,
+        depositAmount: null,
+      },
+      currentForm: 1,
       loading: false,
       error: {
         status: false,
@@ -313,14 +340,55 @@ export default {
     }
   },
   mounted: function() {
-    // add the google api key for the maps
-    const script = document.createElement('script');
-    script.async = true;
-    script.defer = true;
-    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
-    document.querySelector('head').appendChild(script);
-  }
+    // get the course id from the url
+    this.courseInfo.id = this.$route.query.c;
 
+    // Add the google api key for the maps
+    // check that the script is not already up
+    // if (document.getElementById("google-maps-key-script")) {
+      // Add Script to head
+      const script = document.createElement('script');
+      script.setAttribute("id", "google-maps-key-script");
+      script.async = true;
+      script.defer = true;
+      script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
+      document.querySelector('head').appendChild(script);
+    // }
+    // End Add the google api key for the maps
+
+
+    // Make the request to get course information
+    axios.get('https://admin.phlebs.com/api/course/'+this.courseInfo.id)
+    .then((response) => {
+      if(response.data.success == true){
+        // Set all the information to
+        var data = response.data.course;
+        this.courseInfo.valid = "finished";
+        this.courseInfo.state = data.city.state.abbreviation;
+        this.courseInfo.agreement = data.enrollment_agreement;
+        this.courseInfo.courseCost = data.cost;
+        this.courseInfo.examFeeCost = data.exam_cost;
+        this.courseInfo.insuranceCost = data.insurance_cost;
+        this.courseInfo.depositAmount = data.deposit;
+      }
+      else{
+        // The course does not exist
+        this.courseInfo.valid = false;
+      }
+    })
+    .catch((error) => {
+      this.courseInfo.valid = false;
+      // Generice error telling to call and try again later
+        this.error = {
+          status: true,
+          type: 'Server',
+          message: 'Your course id having problems, please call 888-531-8378 or try again another course.'
+        };
+        // go to the top of the screen so the user can see the error
+        window.scroll(0,0);
+        console.log(error);
+    });
+  }
 }
 </script>
 
