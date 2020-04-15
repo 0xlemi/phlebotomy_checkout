@@ -36,10 +36,10 @@
 
         <form-english v-if="currentForm == 1 && courseInfo.state == 'CA'" :values="values.form1" v-on:next="next"></form-english>
 
+        <form-transcripts v-if="currentForm == 1 && courseInfo.state == 'TN'" :values="values.form1" v-on:next="next"></form-transcripts>
+
         <div class="hidden lg:block h-56" v-if="currentForm == 1">
         </div>
-
-        <english-message class="lg:hidden p-8" color="red" v-if="!values.form1.english_test && currentForm == 1"></english-message>
 
         <form-basic v-if="currentForm == 2" :values="values.form2" :has-intro-question="this.hasIntroQuestion" v-on:next="next" v-on:back="back" ></form-basic>
 
@@ -66,7 +66,9 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <english-message class="p-8" v-if="!values.form1.english_test && (currentForm == 1 && courseInfo.state == 'CA')"></english-message>
+    <english-message class="p-8" v-if="!values.form1.firstTest && (currentForm == 1 && courseInfo.state == 'CA')"></english-message>
+
+    <transcript-message class="p-8" v-if="!values.form1.firstTest && (currentForm == 1 && courseInfo.state == 'TN')"></transcript-message>
 
     <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
 
@@ -121,6 +123,7 @@
 
 import ProgressBar from './Elements/ProgressBar.vue'
 import FormEnglish from './Forms/FormEnglish.vue'
+import FormTranscripts from './Forms/FormTranscripts.vue'
 import FormBasic from './Forms/FormBasic.vue'
 import FormAddress from './Forms/FormAddress.vue'
 import FormPayment from './Forms/FormPayment.vue'
@@ -128,18 +131,21 @@ import SuccessMessage from './Forms/SuccessMessage.vue'
 import SuccessMessageSideBar from './SideBar/SuccessMessageSideBar.vue'
 
 import EnglishMessage from './SideBar/EnglishMessage.vue'
+import TranscriptMessage from './SideBar/TranscriptMessage.vue'
 import PriceTable from './SideBar/PriceTable.vue'
 
 export default {
   components: {
     'progress-bar' : ProgressBar,
     'form-english' : FormEnglish,
+    'form-transcripts' : FormTranscripts,
     'form-basic' : FormBasic,
     'form-address' : FormAddress,
     'form-payment' : FormPayment,
     'success-message' : SuccessMessage,
     'success-message-side-bar' : SuccessMessageSideBar,
     'english-message' : EnglishMessage,
+    'transcript-message' : TranscriptMessage,
     'price-table' : PriceTable
   },
   methods: {
@@ -297,7 +303,7 @@ export default {
       },
       values: {
         form1:{
-          english_test: true
+          firstTest: true
         },
         form2:{
           name: 'pepe',
