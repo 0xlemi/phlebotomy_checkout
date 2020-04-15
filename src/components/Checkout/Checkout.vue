@@ -34,18 +34,18 @@
 
       <div class="mx-8 mt-8">
 
-        <form-english v-if="currentForm == 1" :values="values.form1" v-on:next="next"></form-english>
+        <form-english v-if="currentForm == 1 && courseInfo.state == 'CA'" :values="values.form1" v-on:next="next"></form-english>
 
         <div class="hidden lg:block h-56" v-if="currentForm == 1">
         </div>
 
         <english-message class="lg:hidden p-8" color="red" v-if="!values.form1.english_test && currentForm == 1"></english-message>
 
-        <form-basic v-if="currentForm == 2" :values="values.form2" v-on:next="next" v-on:back="back" ></form-basic>
+        <form-basic v-if="currentForm == 2" :values="values.form2" :has-intro-question="this.hasIntroQuestion" v-on:next="next" v-on:back="back" ></form-basic>
 
         <form-address v-if="currentForm == 3":values="values.form3" v-on:next="next" v-on:back="back" ></form-address>
 
-        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :termsOfServiceLink="courseInfo.termsOfServiceLink" v-on:back="back" ></form-payment>
+        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :termsOfServiceLink="courseInfo.termsOfServiceLink" :state="courseInfo.state" v-on:back="back" ></form-payment>
 
         <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
 
@@ -66,7 +66,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <english-message class="p-8" v-if="!values.form1.english_test && currentForm == 1"></english-message>
+    <english-message class="p-8" v-if="!values.form1.english_test && (currentForm == 1 && courseInfo.state == 'CA')"></english-message>
 
     <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
 
@@ -262,6 +262,9 @@ export default {
     },
     totalPrice: function() {
       return this.courseInfo.courseCost + this.courseInfo.examFeeCost + this.courseInfo.insuranceCost;
+    },
+    hasIntroQuestion: function() {
+      return (this.courseInfo.state == 'CA' || this.courseInfo.state == 'TN');
     }
   },
   filters: {
@@ -297,25 +300,25 @@ export default {
           english_test: true
         },
         form2:{
-          name: '',
-          last_name: '',
-          email: '',
-          number: '',
-          dob: '',
-          ssn: ''
+          name: 'pepe',
+          last_name: 'gonzalez',
+          email: 'pepe@gmail.com',
+          number: '2349879043',
+          dob: '03221993',
+          ssn: '1234'
         },
         form3:{
-          address: '',
-          city: '',
-          state: '',
-          zip: ''
+          address: '12340 Santa Monica Boulevard',
+          city: 'Los Angeles',
+          state: 'CA',
+          zip: '90025'
         },
         form4:{
           payFull: false,
-          name: '',
-          number: '',
-          exp: '',
-          code: '',
+          name: 'jon sanchez',
+          number: '4111111111111111',
+          exp: '0322',
+          code: '123',
           type: '',
           same_billing: "true", // Is easier to use a string for radio buttons
           billing_address: {
@@ -370,6 +373,8 @@ export default {
           this.courseInfo.examFeeCost = data.exam_cost;
           this.courseInfo.insuranceCost = data.insurance_cost;
           this.courseInfo.depositAmount = data.deposit;
+
+          this.currentForm = (this.courseInfo.state == 'CA' || this.courseInfo.state == 'TN') ? 1 : 2;
         }
         else{
           // The course does not exist

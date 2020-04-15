@@ -202,10 +202,11 @@
           <span class="ml-2 text-red-900">I have read the <a class="hover:text-blue-700 text-blue-500 underline" target="_blank" :href="termsOfServiceLink">enrollment agreement and privacy policy</a> and agree to the terms listed therein.</span>
         </label>
       </div>
-      <div class="mt-4">
+      <div class="mt-4" v-if="hasSecondQuestion">
         <label class="inline-flex items-center">
-          <input type="checkbox" v-model="englishProficient" class="focus:outline-red-100 form-checkbox text-red-700 h-5 w-5">
-          <span class="ml-2 text-red-900">I am proficient in reading and writing the English Language.</span>
+          <input type="checkbox" v-model="secondQuestion" class="focus:outline-red-100 form-checkbox text-red-700 h-5 w-5">
+          <span v-if="state == 'CA'" class="ml-2 text-red-900">I am proficient in reading and writing the English Language.</span>
+          <span v-else-if="state == 'OH'" class="ml-2 text-red-900">I Understand that the State of Ohio requires that I watch a 5 minute Student Consumer video before I attend class. This link along with instructions will be emailed upon registration</span>
         </label>
       </div>
       <!-- End Terms of Service -->
@@ -219,7 +220,7 @@
         </div>
         <div class="flex-1">
           <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !(englishProficient && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
+            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !(secondQuestion && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
               <moon-loader class="px-12 py-4" :loading="loading" color="#FFF5F5" size="25px"></moon-loader>
               <p class="px-8 py-4" v-if="!loading">Pay Now</p>
             </button>
@@ -246,7 +247,7 @@ import { MoonLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 setInteractionMode('passive');
 
 export default {
-  props: ['values', 'loading', 'termsOfServiceLink'],
+  props: ['values', 'loading', 'termsOfServiceLink', 'state'],
   components:{
     'input-facade': InputFacade,
     'card-button': CardButton,
@@ -295,11 +296,14 @@ export default {
           name:'other',
           icon: 'default'
         };
+    },
+    hasSecondQuestion: function() {
+      return (this.state == 'CA' || this.state == 'OH');
     }
   },
   methods: {
     onSubmit: function () {
-      if (this.englishProficient && this.termsOfService && !this.loading){
+      if (this.secondQuestion && this.termsOfService && !this.loading){
         this.$emit('next');
       }
     },
@@ -324,7 +328,7 @@ export default {
   data: function(){
     return {
       termsOfService: false,
-      englishProficient: false
+      secondQuestion: !(this.state == 'CA' || this.state == 'OH')
     }
   }
 }

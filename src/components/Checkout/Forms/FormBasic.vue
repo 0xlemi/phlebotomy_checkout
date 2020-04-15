@@ -120,7 +120,7 @@
 
       <!-- Buttons -->
       <div class="flex mt-10 mb-10">
-        <div class="flex-1">
+        <div v-if="hasIntroQuestion" class="flex-1">
           <button @click="back" type="button" class="underline focus:outline-none text-red-800 font-semibold hover:text-red-600 py-2 px-4">
              Go Back
           </button>
@@ -148,7 +148,7 @@ import { ValidationObserver } from 'vee-validate';
 setInteractionMode('passive');
 
 export default {
-  props: ['values'],
+  props: ['values', 'hasIntroQuestion'],
   components:{
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
