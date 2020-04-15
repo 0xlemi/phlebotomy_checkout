@@ -70,7 +70,13 @@
 
     <transcript-message class="p-8" v-if="!values.form1.firstTest && (currentForm == 1 && courseInfo.state == 'TN')"></transcript-message>
 
-    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
+    <div v-if="courseInfo.state == 'TN'" >
+      <price-table-tn class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table-tn>
+    </div>
+
+    <div v-else >
+      <price-table v-else class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
+    </div>
 
     <!-- Review Information Card -->
     <div v-if="currentForm > 2" :class="[ (currentForm == 5) ? ' pt-6' : 'py-4 pb-10']" class="px-5">
@@ -133,6 +139,7 @@ import SuccessMessageSideBar from './SideBar/SuccessMessageSideBar.vue'
 import EnglishMessage from './SideBar/EnglishMessage.vue'
 import TranscriptMessage from './SideBar/TranscriptMessage.vue'
 import PriceTable from './SideBar/PriceTable.vue'
+import PriceTableTN from './SideBar/PriceTableTN.vue'
 
 export default {
   components: {
@@ -146,7 +153,8 @@ export default {
     'success-message-side-bar' : SuccessMessageSideBar,
     'english-message' : EnglishMessage,
     'transcript-message' : TranscriptMessage,
-    'price-table' : PriceTable
+    'price-table' : PriceTable,
+    'price-table-tn' : PriceTableTN
   },
   methods: {
     next: function(event) {
