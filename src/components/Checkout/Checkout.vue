@@ -45,7 +45,13 @@
 
         <form-address v-if="currentForm == 3":values="values.form3" v-on:next="next" v-on:back="back" ></form-address>
 
-        <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :termsOfServiceLink="courseInfo.termsOfServiceLink" :state="courseInfo.state" v-on:back="back" ></form-payment>
+        <div v-if="courseInfo.state == 'TN'">
+          <form-registration v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :courseList="examDates" :termsOfServiceLink="courseInfo.termsOfServiceLink" :state="courseInfo.state" v-on:back="back" ></form-registration>
+        </div>
+        <div v-else>
+          <form-payment v-if="currentForm == 4" :values="values.form4" :loading="loading" v-on:next="submit" :termsOfServiceLink="courseInfo.termsOfServiceLink" :state="courseInfo.state" v-on:back="back" ></form-payment>
+        </div>
+
 
         <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
 
@@ -75,7 +81,7 @@
     </div>
 
     <div v-else >
-      <price-table v-else class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
+      <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseInfo.courseCost" :exam-fee="courseInfo.examFeeCost" :insurance="courseInfo.insuranceCost" :deposit="courseInfo.depositAmount" :course-name="courseInfo.name"></price-table>
     </div>
 
     <!-- Review Information Card -->
@@ -133,6 +139,7 @@ import FormTranscripts from './Forms/FormTranscripts.vue'
 import FormBasic from './Forms/FormBasic.vue'
 import FormAddress from './Forms/FormAddress.vue'
 import FormPayment from './Forms/FormPayment.vue'
+import FormRegistration from './Forms/FormRegistration.vue'
 import SuccessMessage from './Forms/SuccessMessage.vue'
 import SuccessMessageSideBar from './SideBar/SuccessMessageSideBar.vue'
 
@@ -149,6 +156,7 @@ export default {
     'form-basic' : FormBasic,
     'form-address' : FormAddress,
     'form-payment' : FormPayment,
+    'form-registration' : FormRegistration,
     'success-message' : SuccessMessage,
     'success-message-side-bar' : SuccessMessageSideBar,
     'english-message' : EnglishMessage,
@@ -247,6 +255,26 @@ export default {
         this.loading = false;
       });
     },
+    getExamDates: function(endDate) {
+
+      axios.get('http://admin.phlebs.com/api/city/nashville/national_exams?start_date='+ endDate)
+          .then((response) => {
+            this.examDates = response.data.national_exams[0].course_dates;
+          })
+          .catch((error) => {
+            this.courseInfo.valid = false;
+            // Generice error telling to call and try again later
+              this.error = {
+                status: true,
+                type: 'Exam List Not Found',
+                message: 'There was an error, please call 888-531-8378 or try again another course.'
+              };
+              // go to the top of the screen so the user can see the error
+              window.scroll(0,0);
+              console.log(error);
+        });
+
+    },
     clearError: function () {
       this.error = {
         status: false,
@@ -309,6 +337,7 @@ export default {
         type: '',
         message: ''
       },
+      examDates: null,
       values: {
         form1:{
           firstTest: true
@@ -387,6 +416,10 @@ export default {
           this.courseInfo.examFeeCost = data.exam_cost;
           this.courseInfo.insuranceCost = data.insurance_cost;
           this.courseInfo.depositAmount = data.deposit;
+
+          if (this.courseInfo.state == 'TN') {
+            this.getExamDates(data.end_date);
+          }
 
           this.currentForm = (this.courseInfo.state == 'CA' || this.courseInfo.state == 'TN') ? 1 : 2;
         }
