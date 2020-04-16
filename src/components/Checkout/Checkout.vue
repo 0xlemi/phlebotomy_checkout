@@ -186,6 +186,7 @@ export default {
           exam_payment: false, // Supose this comes form the server
           course_id: this.courseInfo.id, // Supose this comes from the server
           type: this.values.form4.payFull ? "full" : "deposit",
+          national_exam_id: (!this.values.form4.payFull && this.examDates) ? this.examDates[this.values.form4.nationalExamId].course_id : null,
           website: "tmp.localhost"
         },
         student: {
@@ -364,6 +365,7 @@ export default {
           code: '123',
           type: '',
           same_billing: "true", // Is easier to use a string for radio buttons
+          nationalExamId: null,
           billing_address: {
             address1: '',
             address2: '',

@@ -23,7 +23,7 @@
         <div class="mt-4">
           <div class="mt-2" v-for="(item, index) in courseList">
             <label class="inline-flex items-center">
-              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" :value="index" checked>
+              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="values.nationalExamId" :value="index" checked>
               <span class="ml-2">{{ item.course_date }}</span>
             </label>
           </div>
