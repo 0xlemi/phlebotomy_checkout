@@ -1,6 +1,7 @@
 {
   "build": {
     "env": {
+      "VUE_APP_API_URL": "@api-url",
       "VUE_APP_GOOGLE_MAPS_API_KEY": "@google-maps-key"
     }
   }

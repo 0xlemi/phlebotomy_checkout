@@ -179,7 +179,7 @@ export default {
     },
     submit: function(event) {
       this.loading = true;
-      axios.post('https://admin.phlebs.com/api/registration/process', {
+      axios.post(process.env.VUE_APP_API_URL+'api/registration/process', {
         payment: {
           amount: this.values.form4.payFull ? this.totalPrice : this.courseInfo.depositAmount,
           payment_type: "card",
@@ -222,7 +222,7 @@ export default {
           // Set information for the successMessage page
           let data = response.data.enrollment.course;
           this.responseData = {
-            link: "http://students.phlebotomyusa.com/account/student/" + data.city.token,
+            link: "https://students.phlebotomyusa.com/account/student/" + data.city.token,
             dateStart:data.modules.distribution[0],
             dateEnd: data.modules.distribution[data.modules.distribution.length - 1],
             timeStart: data.hours_start,
@@ -258,7 +258,7 @@ export default {
     },
     getExamDates: function(endDate) {
 
-      axios.get('http://admin.phlebs.com/api/city/nashville/national_exams?start_date='+ endDate)
+      axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
           .then((response) => {
             this.examDates = response.data.national_exams[0].course_dates;
           })
@@ -405,7 +405,7 @@ export default {
 
     // Make the request to get course information
     if (this.courseInfo.id) {
-      axios.get('https://admin.phlebs.com/api/course/'+this.courseInfo.id)
+      axios.get(process.env.VUE_APP_API_URL+'api/course/'+this.courseInfo.id)
       .then((response) => {
         if(response.data.success == true){
           // Set all the information to
