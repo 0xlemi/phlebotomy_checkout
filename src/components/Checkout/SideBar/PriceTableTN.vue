@@ -11,32 +11,32 @@
     <tbody>
       <tr>
         <td class="border px-4 py-2">Administrative Fee <span class="font-bold text-xl">*</span></td>
-        <td class="border px-4 py-2">100</td>
+        <td class="border px-4 py-2">$ 100</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">Registration Fee <span class="font-bold text-xl">*</span></td>
-        <td class="border px-4 py-2">150</td>
+        <td class="border px-4 py-2">$ 150</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">Books, Supplies and Equipment</td>
-        <td class="border px-4 py-2">100</td>
+        <td class="border px-4 py-2">$ 100</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">{{ courseName }}</td>
-        <td class="border px-4 py-2">{{ courseCost }}</td>
+        <td class="border px-4 py-2">$ {{ courseCost }}</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">Exam Fee</td>
-        <td class="border px-4 py-2">{{ examFee }}</td>
+        <td class="border px-4 py-2">$ {{ examFee }}</td>
       </tr>
-      <tr>
+      <tr v-if="insurance > 0">
         <td class="border px-4 py-2">Insurance</td>
-        <td class="border px-4 py-2">{{ insurance }}</td>
+        <td class="border px-4 py-2">$ {{ insurance }}</td>
       </tr>
 
       <tr class="text-gray-800 font-semibold bg-gray-100">
         <td class="border px-4 py-2">Total</td>
-        <td class="border px-4 py-2">{{ total }}</td>
+        <td class="border px-4 py-2">$ {{ total }}</td>
       </tr>
     </tbody>
   </table>

@@ -11,28 +11,28 @@
     <tbody>
       <tr>
         <td class="border px-4 py-2">{{ courseName }}</td>
-        <td class="border px-4 py-2">{{ courseCost }}</td>
+        <td class="border px-4 py-2">$ {{ courseCost }}</td>
       </tr>
       <tr class="">
         <td class="border px-4 py-2">Exam Fee</td>
-        <td class="border px-4 py-2">{{ examFee }}</td>
+        <td class="border px-4 py-2">$ {{ examFee }}</td>
       </tr>
-      <tr>
+      <tr v-if="insurance > 0">
         <td class="border px-4 py-2">Insurance</td>
-        <td class="border px-4 py-2">{{ insurance }}</td>
+        <td class="border px-4 py-2">$ {{ insurance }}</td>
       </tr>
 
       <tr :class="[ payFull ? 'text-gray-800 font-semibold': 'line-through text-gray-600' ]" class="bg-gray-100">
         <td class="border px-4 py-2">Total</td>
-        <td class="border px-4 py-2">{{ total }}</td>
+        <td class="border px-4 py-2">$ {{ total }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-gray-100 text-gray-800 font-semibold">
         <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(deposit)</span></td>
-        <td class="border px-4 py-2">{{ deposit }}</td>
+        <td class="border px-4 py-2">$ {{ deposit }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-blue-100 text-blue-800 font-semibold">
         <td class="border px-4 py-2">Remaining Balance</td>
-        <td class="border px-4 py-2">{{ remainingBalance }}</td>
+        <td class="border px-4 py-2">$ {{ remainingBalance }}</td>
       </tr>
     </tbody>
   </table>
