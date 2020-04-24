@@ -26,6 +26,27 @@
       <!-- End Address -->
 
 
+      <!-- Address -->
+      <div class="flex mt-8">
+
+        <div class="w-full mb-3 pt-0">
+
+           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+            Address Field 2 (optional)
+          </label>
+
+          <validation-provider name="address2" rules="" v-slot="{ errors }">
+            <input type="text" v-model="values.address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
+          </validation-provider>
+
+        </div>
+
+      </div>
+      <!-- End Address -->
+
+
+
       <!-- City, State and Zip -->
       <div class="flex mt-8">
 

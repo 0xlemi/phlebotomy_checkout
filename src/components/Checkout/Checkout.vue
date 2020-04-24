@@ -197,6 +197,7 @@ export default {
           phone2: this.number ? this.number[2] : '',
           phone3: this.number ? this.number[3] : '',
           address: this.values.form3.address,
+          address2: this.values.form3.address2,
           city: this.values.form3.city,
           state: this.values.form3.state,
           zip: this.values.form3.zip,
@@ -353,6 +354,7 @@ export default {
         },
         form3:{
           address: '12340 Santa Monica Boulevard',
+          address2: 'test second address',
           city: 'Los Angeles',
           state: 'CA',
           zip: '90025'
