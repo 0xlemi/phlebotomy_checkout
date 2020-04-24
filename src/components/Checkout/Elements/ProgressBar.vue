@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-red-200 ">
-      <div :class="[ (step > numberSteps) ? 'bg-green-400': 'bg-red-400' ]" v-bind:style="styleBar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-all duration-300"></div>
+      <div ref="progressbar-bar" :class="[ (step > numberSteps) ? 'bg-green-400': 'bg-red-400' ]" v-bind:style="styleBar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center transition-all duration-300"></div>
     </div>
   </div>
 </template>
