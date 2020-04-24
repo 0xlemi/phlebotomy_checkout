@@ -345,26 +345,26 @@ export default {
           firstTest: true
         },
         form2:{
-          name: 'pepe',
-          last_name: 'gonzalez',
-          email: 'pepe@gmail.com',
-          number: '2349879043',
-          dob: '03221993',
-          ssn: '1234'
+          name: '',
+          last_name: '',
+          email: '',
+          number: '',
+          dob: '',
+          ssn: ''
         },
         form3:{
-          address: '12340 Santa Monica Boulevard',
-          address2: 'test second address',
-          city: 'Los Angeles',
-          state: 'CA',
-          zip: '90025'
+          address: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: ''
         },
         form4:{
           payFull: false,
-          name: 'jon sanchez',
-          number: '4111111111111111',
-          exp: '0322',
-          code: '123',
+          name: '',
+          number: '',
+          exp: '',
+          code: '',
           type: '',
           same_billing: "true", // Is easier to use a string for radio buttons
           nationalExamId: null,
