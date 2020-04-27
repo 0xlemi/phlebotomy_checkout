@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import EnglishMessage from '@/components/Checkout/SideBar/EnglishMessage.vue'
+import EnglishMessage from '@/components/Checkout/SideBar/Elements/EnglishMessage.vue'
 
 export default {
   props: ['values'],

@@ -18,9 +18,17 @@ const mutations = {
 
 // getters
 const getters = {
+
+  totalPrice: state => {
+    return state.courseCost + state.examFeeCost + state.insuranceCost;
+  },
+  hasIntroQuestion: state => {
+    return (state.state == 'CA' || state.state == 'TN');
+  },
   hasSecondQuestion: state => {
       return (state.state == 'CA' || state.state == 'OH');
   }
+
 }
 
 // actions

@@ -117,6 +117,26 @@ const mutations = {
 // getters
 const getters = {
 
+  formatedNumber: state => {
+    let result = false;
+    if(state.number.length == 10){
+      result = state.number.match(/(\d{3})(\d{3})(\d{4})/);
+    }
+    return result ? `(${result[1]}) ${result[2]}-${result[3]}` : '';
+  },
+  formatedDob: state => {
+    let result = false;
+    if(state.dob.length == 8){
+      result = state.dob.match(/(\d{2})(\d{2})(\d{4})/);
+    }
+      return result ? `${result[1]}/${result[2]}/${result[3]}` : '';
+  },
+  // formatedExp: state => {
+  //   if(state.exp.length == 4){
+  //     return state.exp.match(/(\d{2})(\d{2})/);
+  //   }
+  //   return false;
+  // },
   cardType: state => {
     let visa = /^4[0-9]{12}(?:[0-9]{3})?$/;
     let mastercard = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
