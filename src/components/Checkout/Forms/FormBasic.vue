@@ -19,7 +19,7 @@
           </label>
 
           <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="values.email" placeholder="example@gmail.com" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -37,7 +37,7 @@
           </label>
 
           <validation-provider name="name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="values.name" placeholder="John" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="John" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -50,7 +50,7 @@
           </label>
 
           <validation-provider name="last name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="values.last_name" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -75,7 +75,7 @@
           </label>
 
           <validation-provider name="number" rules="required|numeric|length:10" v-slot="{ errors }">
-            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="values.number" placeholder="(352) 879 - 8928" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(352) 879 - 8928" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -87,7 +87,7 @@
           </label>
 
           <validation-provider name="DOB" rules="required|numeric|length:8" v-slot="{ errors }">
-            <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="values.dob" placeholder="MM / DD / YYYY" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="MM / DD / YYYY" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -99,7 +99,7 @@
           </label>
 
           <validation-provider name="SSN" rules="required|numeric|length:4" v-slot="{ errors }">
-            <input-facade mask="####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="values.ssn" placeholder="XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="ssn" placeholder="XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import { InputFacade } from 'vue-input-facade'
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
@@ -162,13 +163,55 @@ export default {
       this.$emit('back');
     }
   },
-  data: function(){
-    return {
-
+  computed: {
+    email: {
+      get() {
+        return this.$store.state.formData.email;
+      },
+      set (value) {
+        this.$store.commit('formData/updateEmail', value);
+      }
+    },
+    name: {
+      get() {
+        return this.$store.state.formData.name;
+      },
+      set (value) {
+        this.$store.commit('formData/updateName', value);
+      }
+    },
+    lastName: {
+      get() {
+        return this.$store.state.formData.lastName
+      },
+      set (value) {
+        this.$store.commit('formData/updateLastName', value)
+      }
+    },
+    number: {
+      get() {
+        return this.$store.state.formData.number
+      },
+      set (value) {
+        this.$store.commit('formData/updateNumber', value)
+      }
+    },
+    dob: {
+      get() {
+        return this.$store.state.formData.dob
+      },
+      set (value) {
+        this.$store.commit('formData/updateDob', value)
+      }
+    },
+    ssn: {
+      get() {
+        return this.$store.state.formData.ssn
+      },
+      set (value) {
+        this.$store.commit('formData/updateSsn', value)
+      }
     }
   }
 }
 </script>
-
-<style lang="css" scoped>
-</style>

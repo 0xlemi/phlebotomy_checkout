@@ -26,7 +26,7 @@
       <!-- End Address -->
 
 
-      <!-- Address -->
+      <!-- Address 2 -->
       <div class="flex mt-8">
 
         <div class="w-full mb-3 pt-0">
@@ -36,14 +36,14 @@
           </label>
 
           <validation-provider name="address2" rules="" v-slot="{ errors }">
-            <input type="text" v-model="values.address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
         </div>
 
       </div>
-      <!-- End Address -->
+      <!-- End Address 2 -->
 
 
 
@@ -57,7 +57,7 @@
           </label>
 
           <validation-provider name="city" rules="required" v-slot="{ errors }">
-            <input type="text" v-model="values.city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -70,7 +70,7 @@
           </label>
 
           <validation-provider name="state" rules="required|alpha|length:2" v-slot="{ errors }">
-            <input-facade mask="AA" type="text" v-model="values.state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -82,7 +82,7 @@
           </label>
 
           <validation-provider name="zip code" rules="required|numeric|min:5|max:9" v-slot="{ errors }">
-            <input-facade mask="#####  ####" type="text" v-model="values.zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -122,7 +122,6 @@ import { ValidationObserver } from 'vee-validate';
 setInteractionMode('passive');
 
 export default {
-  props: ['values'],
   components: {
     'vue-google-autocomplete': VueGoogleAutocomplete,
     'input-facade': InputFacade,
@@ -146,24 +145,67 @@ export default {
         // Sometimes the street number comes up as undefined
         // we need to handle that "||" is the equivallent
         // to ?: in php
-        this.values.address = (data.street_number || "") + " " + data.route;
-        this.values.city = data.locality;
-        this.values.state = data.administrative_area_level_1;
-        this.values.zip = data.postal_code;
+        this.$store.commit('formData/updateAddress', (data.street_number || "") + " " + data.route);
+        this.$store.commit('formData/updateCity', data.locality);
+        this.$store.commit('formData/updateState', data.administrative_area_level_1);
+        this.$store.commit('formData/updateZip', data.postal_code);
       },
       // Over ride the full address for only street and number
       changeAction: function (data) {
         // Check that the is the full address whitten in
         if (data.substr(data.length - 5) == ', USA')
         {
-          this.$refs.addressInput.update(this.values.address);
+          this.$refs.addressInput.update(this.$store.state.formData.address);
         }
       },
       // If for some reason the address comes bad from google and the user
       // fixes it manualy we need to record that change to prop "address"
       // otherwise that change is not going to get up to the parent
       manualChange: function (data) {
-          this.values.address = data.newVal;
+        this.$store.commit('formData/updateAddress', data.newVal);
+      }
+
+    },
+    computed: {
+      address: {
+        get() {
+          return this.$store.state.formData.address
+        },
+        set (value) {
+          this.$store.commit('formData/updateAddress', value)
+        }
+      },
+      address2: {
+        get() {
+          return this.$store.state.formData.address2
+        },
+        set (value) {
+          this.$store.commit('formData/updateAddress2', value)
+        }
+      },
+      city: {
+        get() {
+          return this.$store.state.formData.city
+        },
+        set (value) {
+          this.$store.commit('formData/updateCity', value)
+        }
+      },
+      state: {
+        get() {
+          return this.$store.state.formData.state
+        },
+        set (value) {
+          this.$store.commit('formData/updateState', value)
+        }
+      },
+      zip: {
+        get() {
+          return this.$store.state.formData.zip
+        },
+        set (value) {
+          this.$store.commit('formData/updateZip', value)
+        }
       }
     },
     data: function () {

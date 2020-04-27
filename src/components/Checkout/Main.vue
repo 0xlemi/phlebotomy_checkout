@@ -179,103 +179,7 @@ export default {
     },
     submit: function(event) {
       this.loading = true;
-      axios.post(process.env.VUE_APP_API_URL+'api/registration/process', {
-        payment: {
-          amount: this.values.form4.payFull ? this.totalPrice : this.courseInfo.depositAmount,
-          payment_type: "card",
-          exam_payment: false, // Supose this comes form the server
-          course_id: this.courseInfo.id, // Supose this comes from the server
-          type: this.values.form4.payFull ? "full" : "deposit",
-          national_exam_id: (!this.values.form4.payFull && this.examDates) ? this.examDates[this.values.form4.nationalExamId].course_id : null,
-          website: "tmp.localhost"
-        },
-        student: {
-          email: this.values.form2.email,
-          name: this.values.form2.name,
-          last_name: this.values.form2.last_name,
-          phone1: this.number ? this.number[1] : '',
-          phone2: this.number ? this.number[2] : '',
-          phone3: this.number ? this.number[3] : '',
-          address: this.values.form3.address,
-          address2: this.values.form3.address2,
-          city: this.values.form3.city,
-          state: this.values.form3.state,
-          zip: this.values.form3.zip,
-          ssn: this.values.form2.ssn,
-          birthMonth: this.dob ? this.dob[1] : '',
-          birthDay: this.dob ? this.dob[2] : '',
-          birthYear: this.dob ? this.dob[3] : '',
-          tos: true
-        },
-        credit_card: {
-          name: this.values.form4.name,
-          number: this.values.form4.number,
-          expiration_month: this.exp ? this.exp[1] : '',
-          expiration_year: this.exp ? '20'+this.exp[2] : '',
-          code: this.values.form4.code,
-          type: this.values.form4.type,
-          same_billing: this.values.form4.same_billing,
-          billing_address: this.values.form4.billing_address
-        }
-      })
-      .then(response => {
-        if(response.data.success == true){
-          // Set information for the successMessage page
-          let data = response.data.enrollment.course;
-          this.responseData = {
-            link: "https://students.phlebotomyusa.com/account/student/" + data.city.token,
-            dateStart:data.modules.distribution[0],
-            dateEnd: data.modules.distribution[data.modules.distribution.length - 1],
-            timeStart: data.hours_start,
-            timeEnd: data.hours_end,
-            city: data.city.map_city
-          };
-          this.currentForm++;
-        }
-        else{
-          // Showing error coming from the server
-          this.error = {
-            status: true,
-            type: response.data.type,
-            message: response.data.error
-          };
-          window.scroll(0,0);
-        }
-        this.loading = false;
-      })
-      .catch(error => {
-        // Generice error telling to call and try again later
-        this.error = {
-          status: true,
-          type: 'Server',
-          message: 'You are not subscribed, please call 888-531-8378 or try again later.'
-        };
-        // go to the top of the screen so the user can see the error
-        window.scroll(0,0);
-        console.log(error);
-
-        this.loading = false;
-      });
-    },
-    getExamDates: function(endDate) {
-
-      axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
-          .then((response) => {
-            this.examDates = response.data.national_exams[0].course_dates;
-          })
-          .catch((error) => {
-            this.courseInfo.valid = false;
-            // Generice error telling to call and try again later
-              this.error = {
-                status: true,
-                type: 'Exam List Not Found',
-                message: 'There was an error, please call 888-531-8378 or try again another course.'
-              };
-              // go to the top of the screen so the user can see the error
-              window.scroll(0,0);
-              console.log(error);
-        });
-
+      // Call sumbint request
     },
     clearError: function () {
       this.error = {
@@ -319,64 +223,25 @@ export default {
       return value ? `${value[1]}/${value[2]}/${value[3]}` : '';
     }
   },
+mounted: function() {
+    // get the course id from the url
+    this.courseInfo.id = this.$route.query.c;
+
+    // get counse info here ************8
+
+    // Make the request to get course information
+    if (this.courseInfo.id) {
+        }else {
+      this.courseInfo.valid = false;
+    }
+  }
   data: function() {
     return {
-      courseInfo: {
-        valid: "loading",
-        id: null,
-        name: null,
-        state: null,
-        termsOfServiceLink: null,
-        courseCost: null,
-        examFeeCost: null,
-        insuranceCost: null,
-        depositAmount: null,
-      },
       currentForm: 1,
       loading: false,
-      error: {
-        status: false,
-        type: '',
-        message: ''
-      },
+      // errorData
       examDates: null,
-      values: {
-        form1:{
-          firstTest: true
-        },
-        form2:{
-          name: '',
-          last_name: '',
-          email: '',
-          number: '',
-          dob: '',
-          ssn: ''
-        },
-        form3:{
-          address: '',
-          address2: '',
-          city: '',
-          state: '',
-          zip: ''
-        },
-        form4:{
-          payFull: false,
-          name: '',
-          number: '',
-          exp: '',
-          code: '',
-          type: '',
-          same_billing: "true", // Is easier to use a string for radio buttons
-          nationalExamId: null,
-          billing_address: {
-            address1: '',
-            address2: '',
-            city: '',
-            state: '',
-            zip: '',
-          }
-        },
-      },
+      // formData
       responseData: {
         link: '',
         dateStart: '',
@@ -386,69 +251,8 @@ export default {
         city: ''
       }
     }
-  },
-  mounted: function() {
-    // get the course id from the url
-    this.courseInfo.id = this.$route.query.c;
-
-    // Add the google api key for the maps
-    // check that the script is not already up
-    // if (document.getElementById("google-maps-key-script")) {
-      // Add Script to head
-      const script = document.createElement('script');
-      script.setAttribute("id", "google-maps-key-script");
-      script.async = true;
-      script.defer = true;
-      script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key='+ process.env.VUE_APP_GOOGLE_MAPS_API_KEY +'&libraries=places');
-      document.querySelector('head').appendChild(script);
-    // }
-    // End Add the google api key for the maps
-
-
-    // Make the request to get course information
-    if (this.courseInfo.id) {
-      axios.get(process.env.VUE_APP_API_URL+'api/course/'+this.courseInfo.id)
-      .then((response) => {
-        if(response.data.success == true){
-          // Set all the information to
-          var data = response.data.course;
-          this.courseInfo.valid = "finished";
-          this.courseInfo.name = data.formatted_name;
-          this.courseInfo.state = data.city.state.abbreviation;
-          this.courseInfo.termsOfServiceLink = data.enrollment_agreement;
-          this.courseInfo.courseCost = data.cost;
-          this.courseInfo.examFeeCost = data.exam_cost;
-          this.courseInfo.insuranceCost = data.insurance_cost;
-          this.courseInfo.depositAmount = data.deposit;
-
-          if (this.courseInfo.state == 'TN') {
-            this.getExamDates(data.end_date);
-          }
-
-          this.currentForm = (this.courseInfo.state == 'CA' || this.courseInfo.state == 'TN') ? 1 : 2;
-        }
-        else{
-          // The course does not exist
-          this.courseInfo.valid = false;
-        }
-      })
-      .catch((error) => {
-        this.courseInfo.valid = false;
-        // Generice error telling to call and try again later
-          this.error = {
-            status: true,
-            type: 'Not Found',
-            message: 'There was an error, please call 888-531-8378 or try again another course.'
-          };
-          // go to the top of the screen so the user can see the error
-          window.scroll(0,0);
-          console.log(error);
-      });
-    }else {
-      this.courseInfo.valid = false;
-    }
   }
-}
+  }
 </script>
 
 <style scoped>
