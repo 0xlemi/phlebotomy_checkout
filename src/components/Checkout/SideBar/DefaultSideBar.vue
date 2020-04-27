@@ -1,16 +1,16 @@
 <template>
 <div class="">
 
-    <english-message class="p-8" v-if="!values.form1.firstTest && (currentForm == 1 && state == 'CA')"></english-message>
+    <english-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'CA')"></english-message>
 
-    <transcript-message class="p-8" v-if="!values.form1.firstTest && (currentForm == 1 && state == 'TN')"></transcript-message>
+    <transcript-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'TN')"></transcript-message>
 
     <div v-if="state == 'TN'" >
-      <price-table-tn class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseCost" :exam-fee="examFeeCost" :insurance="insuranceCost" :deposit="depositAmount" :course-name="name"></price-table-tn>
+      <price-table-tn class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="payFull" :course-cost="courseCost" :exam-fee="examFeeCost" :insurance="insuranceCost" :deposit="depositAmount" :course-name="name"></price-table-tn>
     </div>
 
     <div v-else >
-      <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="values.form4.payFull" :course-cost="courseCost" :exam-fee="examFeeCost" :insurance="insuranceCost" :deposit="depositAmount" :course-name="name"></price-table>
+      <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5" :payFull="payFull" :course-cost="courseCost" :exam-fee="examFeeCost" :insurance="insuranceCost" :deposit="depositAmount" :course-name="name"></price-table>
     </div>
 
     <!-- Review Information Card -->
@@ -21,25 +21,25 @@
         </p>
         <hr class="mt-2 border-gray-400">
         <p class="mt-4 text-gray-700 text-md leading-tight truncate">
-          {{ this.values.form2.name + " " + this.values.form2.last_name }}
+          {{ name + " " + last_name }}
         </p>
         <p class=" mt-2 text-md leading-tight truncate">
-          {{ this.values.form2.email }}
+          {{ email }}
         </p>
         <p class=" mt-2 text-md leading-tight truncate">
           <span class="mr-5">{{ formatedNumber }}</span>
           <span class="mr-5">{{ formatedDob }}</span>
-          <span class="">{{ this.values.form2.ssn }}</span>
+          <span class="">{{ ssn }}</span>
         </p>
         <!-- address info -->
         <div v-if="currentForm > 3">
           <p class=" mt-6 text-gray-700 text-md leading-tight truncate">
-            {{ this.values.form3.address }}
+            {{ address }}
           </p>
           <p class=" mt-2 text-md leading-tight truncate">
-            <span class="mr-5">{{ this.values.form3.city }}</span>
-            <span class="mr-5">{{ this.values.form3.state}}</span>
-            <span class="">{{ this.values.form3.zip }}</span>
+            <span class="mr-5">{{ city }}</span>
+            <span class="mr-5">{{ state}}</span>
+            <span class="">{{ zip }}</span>
           </p>
         </div>
         <!-- payment info -->
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from 'vuex'
 
 import EnglishMessage from './Elements/EnglishMessage.vue'
 import TranscriptMessage from './Elements/TranscriptMessage.vue'
@@ -63,12 +64,35 @@ import PriceTableTN from './Elements/PriceTableTN.vue'
 import SuccessMessageSideBar from './Elements/SuccessMessageSideBar.vue'
 
 export default {
+  props: ['currentForm'],
   components: {
     'english-message' : EnglishMessage,
     'transcript-message' : TranscriptMessage,
     'price-table' : PriceTable,
     'price-table-tn' : PriceTableTN,
     'success-message-side-bar' : SuccessMessageSideBar
+  },
+  computed: {
+    ...mapState('formData', {
+      firstTest: 'firstTest',
+      payFull: 'payFull',
+      name: 'name',
+      lastName: 'lastName',
+      email: 'email',
+      ssn: 'ssn',
+      address: 'address',
+      city: 'city',
+      state: 'state',
+      zip: 'zip'
+    }),
+    ...mapState('courseInformation', {
+      courseState: 'state',
+    }),
+    ...mapGetters('formData', [
+      'formatedNumber',
+      'formatedDob'
+    ]),
+
   }
 }
 </script>

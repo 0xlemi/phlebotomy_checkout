@@ -39,7 +39,9 @@ const state = {
 // mutations
 const mutations = {
   // ***** Form1 *******
-
+  updateFirstTest(state, payload) {
+    state.firstTest = payload;
+  },
 
   // ***** Form2 *******
   updateEmail(state, payload) {

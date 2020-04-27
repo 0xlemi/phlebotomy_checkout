@@ -41,18 +41,17 @@
 
 <script>
 export default {
-  props: ['values'],
   methods: {
     clickYes: function (event) {
       this.yes = true;
       this.no = false;
-      this.values.firstTest  = true;
+      this.$store.commit('formData/updateFirstTest', true);
       this.$emit('next');
     },
     clickNo: function (event) {
       this.yes = false;
       this.no = true;
-      this.values.firstTest  = false;
+      this.$store.commit('formData/updateFirstTest', false);
     }
   },
   data: function (){

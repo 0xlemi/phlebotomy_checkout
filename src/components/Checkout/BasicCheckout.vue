@@ -72,7 +72,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-
+    <default-side-bar :current-form="currentForm"></default-side-bar>
 
   </div>
   <!-- End right side of checkout -->
@@ -168,16 +168,17 @@ export default {
     // },
   },
 mounted: function() {
-    // get the course id from the url
-    this.id = this.$route.query.c;
-
-    // get counse info here ************8
-
-    // Make the request to get course information
-    if (this.id) {
-        }else {
-      this.valid = false;
-    }
+    this.$store.dispatch('courseInformation/loadData');
+    // // get the course id from the url
+    // this.courseId = this.$route.query.c;
+    //
+    // // get counse info here ************8
+    //
+    // // Make the request to get course information
+    // if (this.courseId ) {
+    //     }else {
+    //   this.valid = false;
+    // }
   },
   data: function() {
     return {
