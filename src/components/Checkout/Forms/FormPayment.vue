@@ -199,10 +199,10 @@
       <div class="mt-10">
         <label class="inline-flex">
           <input type="checkbox" v-model="termsOfService" class="focus:outline-red-100 form-checkbox text-red-700 h-5 w-5">
-          <span class="ml-2 text-red-900">I have read the <a class="hover:text-blue-700 text-blue-500 underline" target="_blank" :href="$store.state.courseInformation.termsOfServiceLink">enrollment agreement and privacy policy</a> and agree to the terms listed therein.</span>
+          <span class="ml-2 text-red-900">I have read the <a class="hover:text-blue-700 text-blue-500 underline" target="_blank" :href="termsOfServiceLink">enrollment agreement and privacy policy</a> and agree to the terms listed therein.</span>
         </label>
       </div>
-      <div class="mt-4" v-if="$store.state.courseInformation.hasSecondQuestion">
+      <div class="mt-4" v-if="hasSecondQuestion">
         <label class="inline-flex items-center">
           <input type="checkbox" v-model="secondQuestion" class="focus:outline-red-100 form-checkbox text-red-700 h-5 w-5">
           <span v-if="state == 'CA'" class="ml-2 text-red-900">I am proficient in reading and writing the English Language.</span>
@@ -235,7 +235,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 import { InputFacade } from 'vue-input-facade';
 import CardButton from '../Elements/CardButton.vue';
@@ -258,6 +258,10 @@ export default {
     'moon-loader' : MoonLoader
   },
   computed: {
+    ...mapState('courseInformation', [
+      'termsOfServiceLink',
+      'hasSecondQuestion'
+    ]),
     ...mapGetters('formData', [
       'cardType'
     ]),

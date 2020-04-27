@@ -8,7 +8,10 @@ const state = {
   courseCost: null,
   examFeeCost: null,
   insuranceCost: null,
-  depositAmount: null
+  depositAmount: null,
+  examDates: {
+
+  },
 }
 
 // mutations
@@ -55,11 +58,15 @@ const actions = {
           state.insuranceCost = data.insurance_cost;
           state.depositAmount = data.deposit;
 
-          // if (this.courseInfo.state == 'TN') {
-          //   this.getExamDates(data.end_date);
-          // }
+          if (state.state == 'TN') {
+            context.dispatch('loadExamDates', data.end_date);
+          }
 
-          // this.currentForm = (this.courseInfo.state == 'CA' || this.courseInfo.state == 'TN') ? 1 : 2;
+          // ***************** Comented out for testing ***************88
+          // If is anything other than CA or TN skip the first step
+          // let currentForm = (state.state == 'CA' || state.state == 'TN') ? 1 : 2;
+          // context.commit('checkoutData/updateCurrentForm', currentForm, {root:true} );
+
         }
         else{
           // The course does not exist
@@ -69,15 +76,34 @@ const actions = {
       .catch((error) => {
         state.valid = false;
         // Generice error telling to call and try again later
-          // this.error = {
-          //   status: true,
-          //   type: 'Not Found',
-          //   message: 'There was an error, please call 888-531-8378 or try again another course.'
-          // };
+        context.commit('errorMessage/updateStatus', true, {root:true} );
+        context.commit('errorMessage/updateType', 'Not Found', {root:true} );
+        context.commit('errorMessage/updateMessage', 'There was an error, please call 888-531-8378 or try again another course.', {root:true} );
+
+        // go to the top of the screen so the user can see the error
+        window.scroll(0,0);
+        console.log(error);
+      });
+
+  },
+
+  loadExamDates: async function(context, endDate) {
+
+    axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
+      .then((response) => {
+        state.examDates = response.data.national_exams[0].course_dates;
+      })
+      .catch((error) => {
+        state.valid = false;
+        // Generice error telling to call and try again later
+          context.commit('errorMessage/updateStatus', true, {root:true} );
+          context.commit('errorMessage/updateType', 'Exam List Not Found', {root:true} );
+          context.commit('errorMessage/updateMessage', 'There was an error, please call 888-531-8378 or try again another course.', {root:true} );
+
           // go to the top of the screen so the user can see the error
           window.scroll(0,0);
           console.log(error);
-      });
+    });
 
   }
 

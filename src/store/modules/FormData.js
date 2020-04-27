@@ -14,11 +14,11 @@ const state = {
   ssn: '1234',
 
   // ***** Form3 *******
-  address: '',
-  address2: '',
-  city: '',
-  state: '',
-  zip: '',
+  address: '1234 Santa Monica',
+  address2: 'Santa M. Condo',
+  city: 'San Antonio',
+  state: 'TX',
+  zip: '78201',
 
   // ***** Form4 *******
   payFull: false,

@@ -3,14 +3,18 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import FormData from './modules/FormData';
+import CheckoutData from './modules/CheckoutData';
 import CourseInformation from './modules/CourseInformation';
 import ErrorMessage from './modules/ErrorMessage';
+import FormData from './modules/FormData';
+import ResponseInformation from './modules/ResponseInformation';
 
 export default new Vuex.Store({
   modules: {
-    formData:  FormData,
+    checkoutData:  CheckoutData,
     courseInformation:  CourseInformation,
-    errorMessage:  ErrorMessage
+    errorMessage:  ErrorMessage,
+    formData:  FormData,
+    responseInformation:  ResponseInformation
   }
 })

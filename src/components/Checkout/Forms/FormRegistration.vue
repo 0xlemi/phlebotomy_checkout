@@ -8,7 +8,7 @@
 
     <div class="flex mt-8">
       <!-- Deposit Button -->
-        <card-button @click.native="toggleButton(1)" :selected="!values.payFull">
+        <card-button @click.native="toggleButton(1)" :selected="!payFull">
           <template v-slot:title>Register</template>
           <template v-slot:header>National Exam Fee</template>
           <template v-slot:text>
@@ -18,12 +18,12 @@
         <!-- End Deposit Button -->
       </div>
 
-      <div v-if="!values.payFull" class="mt-4 block text-red-900 ">
+      <div v-if="!payFull" class="mt-4 block text-red-900 ">
         <span class="font-bold">Select a Date</span>
         <div class="mt-4">
-          <div class="mt-2" v-for="(item, index) in courseList">
+          <div class="mt-2" v-for="(item, index) in examDates">
             <label class="inline-flex items-center">
-              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="values.nationalExamId" :value="index" checked>
+              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="item.nationalExamId" :value="index" checked>
               <span class="ml-2">{{ item.course_date }}</span>
             </label>
           </div>
@@ -72,6 +72,9 @@
 </template>
 
 <script>
+
+import { mapState, mapMutations, mapGetters } from 'vuex'
+
 import { InputFacade } from 'vue-input-facade'
 import CardButton from '../Elements/CardButton.vue'
 
@@ -84,7 +87,7 @@ import { MoonLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 setInteractionMode('passive');
 
 export default {
-  props: ['values', 'loading', 'termsOfServiceLink', 'state', 'courseList'],
+  props: ['loading'],
   components:{
     'input-facade': InputFacade,
     'card-button': CardButton,
@@ -93,49 +96,101 @@ export default {
     'moon-loader' : MoonLoader
   },
   computed: {
-    cardType: function() {
-
-      let visa = /^4[0-9]{12}(?:[0-9]{3})?$/;
-      let mastercard = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
-      let discover = /^6(?:011|5[0-9]{2})[0-9]{12}$/;
-      let amex = /^3[47][0-9]{13}$/;
-
-      if (visa.test(this.values.number)){
-        this.values.type = 'visa';
-        return {
-          name:'visa',
-          icon: 'visa'
-        };
+    ...mapState('courseInformation', [
+      'termsOfServiceLink',
+      'hasSecondQuestion',
+      'examDates'
+    ]),
+    ...mapGetters('formData', [
+      'cardType'
+    ]),
+    payFull: {
+      get () {
+        return this.$store.state.formData.payFull;
+      },
+      set (value) {
+        this.$store.commit('formData/updatePayFull', value);
       }
-      else if (mastercard.test(this.values.number)) {
-        this.values.type = 'mastercard';
-        return {
-          name:'mastercard',
-          icon: 'mastercard-old'
-        };
-      }
-      else if (discover.test(this.values.number)) {
-        this.values.type = 'discover';
-        return {
-          name:'discover',
-          icon: 'discover'
-        };
-      }
-      else if (amex.test(this.values.number)) {
-        this.values.type = 'amex';
-        return {
-          name:'amex',
-          icon: 'amex'
-        };
-      }
-      this.values.type = 'other';
-      return {
-          name:'other',
-          icon: 'default'
-        };
     },
-    hasSecondQuestion: function() {
-      return (this.state == 'CA' || this.state == 'OH');
+    billingName: {
+      get () {
+        return this.$store.state.formData.billingName;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingName', value);
+      }
+    },
+    billingNumber: {
+      get () {
+        return this.$store.state.formData.billingNumber;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingNumber', value);
+      }
+    },
+    exp: {
+      get () {
+        return this.$store.state.formData.exp;
+      },
+      set (value) {
+        this.$store.commit('formData/updateExp', value);
+      }
+    },
+    code: {
+      get () {
+        return this.$store.state.formData.code;
+      },
+      set (value) {
+        this.$store.commit('formData/updateCode', value);
+      }
+    },
+    sameBilling: {
+      get () {
+        return this.$store.state.formData.sameBilling;
+      },
+      set (value) {
+        this.$store.commit('formData/updateSameBilling', value);
+      }
+    },
+    billingAddress1: {
+      get () {
+        return this.$store.state.formData.billingAddress1;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingAddress1', value);
+      }
+    },
+    billingAddress2: {
+      get () {
+        return this.$store.state.formData.billingAddress2;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingAddress2', value);
+      }
+    },
+    billingCity: {
+      get () {
+        return this.$store.state.formData.billingCity;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingCity', value);
+      }
+    },
+    billingState: {
+      get () {
+        return this.$store.state.formData.billingState;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingState', value);
+      }
+    },
+    billingZip: {
+      get () {
+        return this.$store.state.formData.billingZip;
+      },
+      set (value) {
+        this.$store.commit('formData/updateBillingZip', value);
+      }
     }
   },
   methods: {
@@ -148,13 +203,13 @@ export default {
       this.$emit('back');
     },
     toggleButton: function (event){
-      this.values.payFull = !this.values.payFull;
+      this.payFull = !this.payFull;
     }
   },
   data: function(){
     return {
       termsOfService: false,
-      secondQuestion: !(this.state == 'CA' || this.state == 'OH')
+      secondQuestion: !this.hasSecondQuestion
     }
   }
 }

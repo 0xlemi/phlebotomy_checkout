@@ -1,5 +1,7 @@
 // initial state
 const state = {
+  currentForm: 4,
+  loading: false
 }
 
 // getters
@@ -15,6 +17,19 @@ const actions = {
 // mutations
 const mutations = {
 
+  incrementCurrentForm(state, payload){
+    state.currentForm = state.currentForm + 1;
+  },
+  decrementCurrentForm(state, payload){
+    state.currentForm = state.currentForm - 1;
+  },
+
+  updateCurrentForm(state, payload) {
+    state.currentForm = payload;
+  },
+  updateLoading(state, payload) {
+    state.loading = payload;
+  }
 
 }
 

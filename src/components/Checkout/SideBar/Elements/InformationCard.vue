@@ -21,6 +21,10 @@
         <p class=" mt-6 text-gray-700 text-md leading-tight truncate">
           {{ address }}
         </p>
+
+        <p v-if="address2 != ''" class=" mt-2 text-gray-700 text-md leading-tight truncate">
+          {{ address2 }}
+        </p>
         <p class=" mt-2 text-md leading-tight truncate">
           <span class="mr-5">{{ city }}</span>
           <span class="mr-5">{{ state}}</span>
@@ -50,6 +54,7 @@ export default {
       email: 'email',
       ssn: 'ssn',
       address: 'address',
+      address2: 'address2',
       city: 'city',
       state: 'state',
       zip: 'zip'

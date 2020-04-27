@@ -1,5 +1,6 @@
 <template>
 <div class="flex">
+
   <!-- Left side of checkout -->
   <div class="w-full lg:w-3/5 border-r-2 bg-red-100 border-red-200">
 
@@ -30,14 +31,14 @@
         <form-address v-if="currentForm == 3"v-on:next="next" v-on:back="back" ></form-address>
 
         <div v-if="state == 'TN'">
-          <form-registration v-if="currentForm == 4" :loading="loading" v-on:next="submit" :courseList="examDates" :termsOfServiceLink="termsOfServiceLink" :state="state" v-on:back="back" ></form-registration>
+          <form-registration v-if="currentForm == 4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-registration>
         </div>
         <div v-else>
-          <form-payment v-if="currentForm == 4" :loading="loading" v-on:next="submit" :termsOfServiceLink="termsOfServiceLink" :state="state" v-on:back="back" ></form-payment>
+          <form-payment v-if="currentForm == 4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
         </div>
 
 
-        <success-message v-if="currentForm == 5" :values="responseData" ></success-message>
+        <success-message v-if="currentForm == 5"></success-message>
 
       </div>
 
@@ -99,22 +100,26 @@ export default {
   methods: {
     next: function(event) {
       if(this.currentForm <= 4){
-        this.currentForm++;
+        this.$store.commit('checkoutData/incrementCurrentForm');
         this.$emit('changeForm', this.currentForm);
       }
     },
     back: function(event) {
       if(this.currentForm > 1){
-        this.currentForm--;
+        this.$store.commit('checkoutData/decrementCurrentForm');
         this.$emit('changeForm', this.currentForm);
       }
     },
     submit: function(event) {
-      this.loading = true;
-      // Call sumbint request
+      this.$store.commit('checkoutData/updateLoading', true);
+      // ********** Call sumbint request *********
     }
   },
   computed: {
+    ...mapState('checkoutData', [
+      'loading',
+      'currentForm'
+    ]),
     ...mapState('courseInformation', [
       'valid',
       'id',
@@ -143,7 +148,7 @@ export default {
     // },
   },
 mounted: function() {
-    // get the course id from the url
+
     this.$store.dispatch('courseInformation/loadData', this.$route.query.c);
     //
     // // get counse info here ************8
@@ -153,25 +158,8 @@ mounted: function() {
     //     }else {
     //   this.valid = false;
     // }
-  },
-  data: function() {
-    return {
-      currentForm: 1,
-      loading: false,
-      // errorData
-      examDates: null,
-      // formData
-      responseData: {
-        link: '',
-        dateStart: '',
-        dateEnd: '',
-        timeStart: '',
-        timeEnd: '',
-        city: ''
-      }
-    }
   }
-  }
+}
 </script>
 
 <style scoped>
