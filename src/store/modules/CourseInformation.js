@@ -19,8 +19,12 @@ const mutations = {
 // getters
 const getters = {
 
+
   totalPrice: state => {
     return state.courseCost + state.examFeeCost + state.insuranceCost;
+  },
+  remainingBalance:(state, getters) => {
+    return getters.totalPrice - state.depositAmount;
   },
   hasIntroQuestion: state => {
     return (state.state == 'CA' || state.state == 'TN');
@@ -34,13 +38,14 @@ const getters = {
 // actions
 const actions = {
 
-  loadData: async function (context) {
+  loadData: async function (context, courseId) {
 
-    axios.get(process.env.VUE_APP_API_URL+'api/course/4584')
+    axios.get(process.env.VUE_APP_API_URL+'api/course/'+ courseId)
       .then((response) => {
         if(response.data.success == true){
           // Set all the information to
           var data = response.data.course;
+          state.id = 0;
           state.valid = "finished";
           state.name = data.formatted_name;
           state.state = data.city.state.abbreviation;

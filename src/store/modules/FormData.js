@@ -6,12 +6,12 @@ const state = {
   firstTest: true,
 
   // ***** Form2 *******
-  name: '',
-  lastName: '',
-  email: '',
-  number: '',
-  dob: '',
-  ssn: '',
+  name: 'pepe',
+  lastName: 'Gonzales',
+  email: 'pepe@gmail.com',
+  number: '2340982348',
+  dob: '03221993',
+  ssn: '1234',
 
   // ***** Form3 *******
   address: '',

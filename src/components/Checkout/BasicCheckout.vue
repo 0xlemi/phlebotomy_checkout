@@ -168,9 +168,8 @@ export default {
     // },
   },
 mounted: function() {
-    this.$store.dispatch('courseInformation/loadData');
-    // // get the course id from the url
-    // this.courseId = this.$route.query.c;
+    // get the course id from the url
+    this.$store.dispatch('courseInformation/loadData', this.$route.query.c);
     //
     // // get counse info here ************8
     //

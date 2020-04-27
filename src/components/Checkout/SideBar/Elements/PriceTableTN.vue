@@ -22,21 +22,21 @@
         <td class="border px-4 py-2">$ 100</td>
       </tr>
       <tr>
-        <td class="border px-4 py-2">{{ courseName }}</td>
-        <td class="border px-4 py-2">$ {{ courseCost }}</td>
+        <td class="border px-4 py-2">{{ name }}</td>
+        <td class="border px-4 py-2">$ {{ courseCost - 250 }}</td>
       </tr>
       <tr>
         <td class="border px-4 py-2">Exam Fee</td>
-        <td class="border px-4 py-2">$ {{ examFee }}</td>
+        <td class="border px-4 py-2">$ {{ examFeeCost }}</td>
       </tr>
-      <tr v-if="insurance > 0">
+      <tr v-if="insuranceCost > 0">
         <td class="border px-4 py-2">Insurance</td>
-        <td class="border px-4 py-2">$ {{ insurance }}</td>
+        <td class="border px-4 py-2">$ {{ insuranceCost }}</td>
       </tr>
 
       <tr class="text-gray-800 font-semibold bg-gray-100">
         <td class="border px-4 py-2">Total</td>
-        <td class="border px-4 py-2">$ {{ total }}</td>
+        <td class="border px-4 py-2">$ {{ totalPrice }}</td>
       </tr>
     </tbody>
   </table>
@@ -45,23 +45,25 @@
 </template>
 
 <script>
+
+import { mapState, mapGetters } from 'vuex'
+
 export default {
-  props: {
-    courseCost: Number,
-    examFee: Number,
-    insurance: Number,
-    deposit: Number,
-    courseName: String,
-    payFull: Boolean
-  },
   computed: {
-    total: function () {
-      // Just sum all the values inside the object
-      return this.courseCost + this.examFee + this.insurance + this.deposit;
-    },
-    remainingBalance: function() {
-      return this.total - this.deposit;
-    }
+    ...mapState('courseInformation', [
+      'name',
+      'courseCost',
+      'examFeeCost',
+      'insuranceCost',
+      'depositAmount'
+    ]),
+    ...mapGetters('courseInformation', [
+      'remainingBalance',
+      'totalPrice'
+    ]),
+    ...mapState('formData', [
+      'payFull'
+    ])
   },
 }
 </script>
