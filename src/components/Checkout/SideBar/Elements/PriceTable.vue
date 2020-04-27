@@ -59,7 +59,7 @@ export default {
     ...mapState('formData', [
       'payFull'
     ])
-  },
+  }
 }
 </script>
 

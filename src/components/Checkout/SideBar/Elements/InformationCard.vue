@@ -6,7 +6,7 @@
       </p>
       <hr class="mt-2 border-gray-400">
       <p class="mt-4 text-gray-700 text-md leading-tight truncate">
-        {{ name + " " + last_name }}
+        {{ name + " " + lastName }}
       </p>
       <p class=" mt-2 text-md leading-tight truncate">
         {{ email }}
