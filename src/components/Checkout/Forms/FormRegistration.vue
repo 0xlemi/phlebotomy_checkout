@@ -23,8 +23,8 @@
         <div class="mt-4">
           <div class="mt-2" v-for="(item, index) in examDates">
             <label class="inline-flex items-center">
-              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="item.nationalExamId" :value="index" checked>
-              <span class="ml-2">{{ item.course_date }}</span>
+              <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="nationalExam" :value="item.id" checked>
+              <span class="ml-2">{{item.dayOfTheWeek}} <span class="font-bold">{{item.formattedDate}}</span> at {{item.time}} </span>
             </label>
           </div>
         </div>
@@ -104,6 +104,15 @@ export default {
     ...mapGetters('formData', [
       'cardType'
     ]),
+    // TN Specific
+    nationalExam: {
+      get () {
+        return this.$store.state.formData.nationalExam;
+      },
+      set (value) {
+        this.$store.commit('formData/updateNationalExam', value);
+      }
+    },
     payFull: {
       get () {
         return this.$store.state.formData.payFull;

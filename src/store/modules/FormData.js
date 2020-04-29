@@ -34,6 +34,8 @@ const state = {
   billingCity: '',
   billingState: '',
   billingZip: '',
+  // TN Form Data Extra
+  nationalExam: null
 }
 
 // mutations
@@ -113,6 +115,11 @@ const mutations = {
   },
   updateBillingZip(state, payload) {
     state.billingZip = payload;
+  },
+
+  // TN Specific
+  updateNationalExam(state, payload) {
+    state.nationalExam = payload;
   },
 };
 

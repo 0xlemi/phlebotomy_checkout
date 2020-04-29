@@ -148,19 +148,8 @@ export default {
     // },
   },
 mounted: function() {
-
+    // Get Curse Information From Server
     this.$store.dispatch('courseInformation/loadData', this.$route.query.c);
-    //
-    // // get counse info here ************8
-    //
-    // // Make the request to get course information
-    // if (this.courseId ) {
-    //     }else {
-    //   this.valid = false;
-    // }
   }
 }
 </script>
-
-<style scoped>
-</style>
