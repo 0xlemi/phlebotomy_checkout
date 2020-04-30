@@ -9,8 +9,9 @@ const state = {
   examFeeCost: null,
   insuranceCost: null,
   depositAmount: null,
+  // TN Specific
+  availableForPayment: false,
   examDates: {
-
   },
 }
 
@@ -59,7 +60,9 @@ const actions = {
             state.insuranceCost = data.insurance_cost;
             state.depositAmount = data.deposit;
 
+
             if (state.state == 'TN') {
+              state.availableForPayment = data.available_for_payment;
               context.dispatch('loadExamDates', data.end_date);
             }
 
@@ -107,19 +110,19 @@ const actions = {
             time: object.formatted_times
           };
         });
-        context.commit('formData/updateNationalExam', nationalExams[0].id, {root:true} );
+        context.commit('formData/updateNationalExamId', nationalExams[0].id, {root:true} );
         state.examDates = nationalExams;
       })
       .catch((error) => {
         state.valid = false;
         // Generice error telling to call and try again later
-          context.commit('errorMessage/updateStatus', true, {root:true} );
-          context.commit('errorMessage/updateType', 'Exam List Not Found', {root:true} );
-          context.commit('errorMessage/updateMessage', 'There was an error, please call 888-531-8378 or try again another course.', {root:true} );
+        context.commit('errorMessage/updateStatus', true, {root:true} );
+        context.commit('errorMessage/updateType', 'Exam List Not Found', {root:true} );
+        context.commit('errorMessage/updateMessage', 'There was an error, please call 888-531-8378 or try again another course.', {root:true} );
 
-          // go to the top of the screen so the user can see the error
-          window.scroll(0,0);
-          console.log(error);
+        // go to the top of the screen so the user can see the error
+        window.scroll(0,0);
+        console.log(error);
     });
 
   }

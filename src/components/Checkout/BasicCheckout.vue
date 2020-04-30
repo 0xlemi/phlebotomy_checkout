@@ -30,10 +30,7 @@
 
         <form-address v-if="currentForm == 3"v-on:next="next" v-on:back="back" ></form-address>
 
-        <div v-if="state == 'TN'">
-          <form-registration v-if="currentForm == 4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-registration>
-        </div>
-        <div v-else>
+        <div>
           <form-payment v-if="currentForm == 4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
         </div>
 
@@ -78,7 +75,6 @@ import FormTranscripts from './Forms/FormTranscripts.vue'
 import FormBasic from './Forms/FormBasic.vue'
 import FormAddress from './Forms/FormAddress.vue'
 import FormPayment from './Forms/FormPayment.vue'
-import FormRegistration from './Forms/FormRegistration.vue'
 import SuccessMessage from './Forms/SuccessMessage.vue'
 
 import DefaultSideBar from './SideBar/DefaultSideBar.vue'
@@ -92,7 +88,6 @@ export default {
     'form-basic' : FormBasic,
     'form-address' : FormAddress,
     'form-payment' : FormPayment,
-    'form-registration' : FormRegistration,
     'success-message' : SuccessMessage,
 
     'default-side-bar': DefaultSideBar

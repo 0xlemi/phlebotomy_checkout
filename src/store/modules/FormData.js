@@ -28,14 +28,15 @@ const state = {
   code: '',
   // type is in getter
   sameBilling: "true", // Is easier to use a string for radio buttons
-  // nationalExamId: null,
   billingAddress1: '',
   billingAddress2: '',
   billingCity: '',
   billingState: '',
   billingZip: '',
+
   // TN Form Data Extra
-  nationalExam: null
+  hasNationalExam: false,
+  nationalExamId: { }
 }
 
 // mutations
@@ -118,8 +119,11 @@ const mutations = {
   },
 
   // TN Specific
-  updateNationalExam(state, payload) {
-    state.nationalExam = payload;
+  updateHasNationalExam(state, payload) {
+    state.hasNationalExam = payload;
+  },
+  updateNationalExamId(state, payload) {
+    state.nationalExamId = payload;
   },
 };
 

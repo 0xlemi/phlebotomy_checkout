@@ -9,11 +9,23 @@
       </tr>
     </thead>
     <tbody>
+      <tr v-if="state == 'TN'">
+        <td class="border px-4 py-2">Administrative Fee <span class="font-bold text-xl">*</span></td>
+        <td class="border px-4 py-2">$ 100</td>
+      </tr>
+      <tr v-if="state == 'TN'">
+        <td class="border px-4 py-2">Registration Fee <span class="font-bold text-xl">*</span></td>
+        <td class="border px-4 py-2">$ 150</td>
+      </tr>
+      <tr v-if="state == 'TN'">
+        <td class="border px-4 py-2">Books, Supplies and Equipment</td>
+        <td class="border px-4 py-2">$ 100</td>
+      </tr>
       <tr>
         <td class="border px-4 py-2">{{ name }}</td>
-        <td class="border px-4 py-2">$ {{ courseCost }}</td>
+        <td class="border px-4 py-2">$ {{ courseCost - 250 }}</td>
       </tr>
-      <tr class="">
+      <tr v-if="!hasNationalExam">
         <td class="border px-4 py-2">Exam Fee</td>
         <td class="border px-4 py-2">$ {{ examFeeCost }}</td>
       </tr>
@@ -22,9 +34,9 @@
         <td class="border px-4 py-2">$ {{ insuranceCost }}</td>
       </tr>
 
-      <tr :class="[ payFull ? 'text-gray-800 font-semibold': 'line-through text-gray-600' ]" class="bg-gray-100">
+      <tr :class="[ payFull ? 'text-gray-800 bg-gray-100 font-semibold': 'line-through text-gray-600' ]" class="">
         <td class="border px-4 py-2">Total</td>
-        <td class="border px-4 py-2">$ {{ totalPrice }}</td>
+        <td class="border px-4 py-2">$ {{ totalPrice + (this.hasNationalExam ? 0 : 100) }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-gray-100 text-gray-800 font-semibold">
         <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(depositAmount)</span></td>
@@ -32,10 +44,11 @@
       </tr>
       <tr v-if="!payFull" class="bg-blue-100 text-blue-800 font-semibold">
         <td class="border px-4 py-2">Remaining Balance</td>
-        <td class="border px-4 py-2">$ {{ remainingBalance }}</td>
+        <td class="border px-4 py-2">$ {{ remainingBalance + (this.hasNationalExam ? 0 : 100) }}</td>
       </tr>
     </tbody>
   </table>
+  <p class="mx-6 mt-4">Fees with <span class="font-bold text-xl">*</span> are due before the first day of class.</p>
 </div>
 </template>
 
@@ -46,6 +59,7 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapState('courseInformation', [
+      'state',
       'name',
       'courseCost',
       'examFeeCost',
@@ -57,9 +71,10 @@ export default {
       'totalPrice'
     ]),
     ...mapState('formData', [
-      'payFull'
+      'payFull',
+      'hasNationalExam'
     ])
-  }
+  },
 }
 </script>
 

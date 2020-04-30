@@ -1,5 +1,5 @@
 <template>
-<div style="cursor:pointer;" :class="[ selected ? 'bg-green-200 border-2 border-green-400': 'bg-red-100 hover:bg-red-200 border-2 border-red-200 hover:border-red-300' ]" class="w-1/2 py-6 pl-6 pr-4 mb-3 mr-6 rounded-lg ">
+<div style="cursor:pointer;" :class="[ selected ? selectedClass : unselectedClass ]" class="w-1/2 py-6 pl-6 pr-4 mb-3 mr-6 rounded-lg ">
     <div class="flex">
       <div class="w-4/5 mt-1">
         <h5 :class="[ selected ? 'text-green-900': 'text-red-900' ]" class=" font-semibold text-lg leading-tight truncate"><slot name="title"></slot></h5>
@@ -31,6 +31,14 @@ export default {
     variable: {
       type: String,
       default: ''
+    },
+    selectedClass: {
+      type: String,
+      default: 'bg-green-200 border-2 border-green-400'
+    },
+    unselectedClass:{
+      type: String,
+      default: 'bg-red-100 hover:bg-red-200 border-2 border-red-200 hover:border-red-300'
     }
   },
   components: {
