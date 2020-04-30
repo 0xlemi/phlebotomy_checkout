@@ -102,8 +102,6 @@ import { InputFacade } from 'vue-input-facade';
 
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
 
-setInteractionMode('passive');
-
 export default {
   components: {
     'input-facade': InputFacade,

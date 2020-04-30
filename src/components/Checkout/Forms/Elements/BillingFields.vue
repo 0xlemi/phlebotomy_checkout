@@ -73,14 +73,11 @@ import {  mapGetters } from 'vuex'
 
 import { InputFacade } from 'vue-input-facade';
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
-import { ValidationObserver } from 'vee-validate';
-setInteractionMode('passive');
 
 export default {
   components: {
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
-    'validation-observer' : ValidationObserver,
   },
   computed: {
     ...mapGetters('formData', [

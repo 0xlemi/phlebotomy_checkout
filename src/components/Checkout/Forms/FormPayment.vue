@@ -6,7 +6,7 @@
 
   <hr class="border-red-300 mt-5">
 
-    <!-- Payment -->
+    <!-- Payment Fields -->
 
     <validation-observer v-slot="{ handleSubmit}">
 
@@ -22,7 +22,7 @@
         <billing-address-fields></billing-address-fields>
 
       </div>
-    <!-- End Payment -->
+    <!-- End Payment Fields -->
 
 
       <hr class="border-red-300 mt-8">
@@ -60,6 +60,7 @@
         </div>
       </div>
       <!-- End Buttons -->
+      
   </validation-observer>
 
 </div>
