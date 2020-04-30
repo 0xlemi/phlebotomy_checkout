@@ -1,5 +1,5 @@
 <template>
-<validation-observer v-slot="{ handleSubmit}">
+<div >
   <!-- Number, Exp and CVC -->
   <div class="flex mt-8">
 
@@ -64,16 +64,16 @@
   </div>
   <!-- End Name on Card -->
 
-
-</validation-observer>
+</div>
 </template>
 
 <script>
-import { InputFacade } from 'vue-input-facade';
 
+import {  mapGetters } from 'vuex'
+
+import { InputFacade } from 'vue-input-facade';
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
-
 setInteractionMode('passive');
 
 export default {
@@ -83,7 +83,10 @@ export default {
     'validation-observer' : ValidationObserver,
   },
   computed: {
-        billingName: {
+    ...mapGetters('formData', [
+      'cardType'
+    ]),
+    billingName: {
       get () {
         return this.$store.state.formData.billingName;
       },

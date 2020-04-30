@@ -7,22 +7,22 @@
   <hr class="border-red-300 mt-5">
 
     <!-- Payment -->
-    <div class="flex mt-8">
-    </div>
+
+    <validation-observer v-slot="{ handleSubmit}">
+
+      <national-exam-registration-select v-if="state == 'TN'">
+      </national-exam-registration-select>
+
+      <div v-if="!(state == 'TN') || availableForPayment">
+
+        <deposit-full-select></deposit-full-select>
+
+        <billing-fields></billing-fields>
+
+        <billing-address-fields></billing-address-fields>
+
+      </div>
     <!-- End Payment -->
-
-    <national-exam-registration-select v-if="state == 'TN'">
-    </national-exam-registration-select>
-
-    <div v-if="!(state == 'TN') || availableForPayment">
-
-      <deposit-full-select></deposit-full-select>
-
-      <billing-fields></billing-fields>
-
-      <billing-address-fields></billing-address-fields>
-
-    </div>
 
 
       <hr class="border-red-300 mt-8">
@@ -52,7 +52,7 @@
         </div>
         <div class="flex-1">
           <div class="flex justify-end">
-            <button @click="onSubmit" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !(secondQuestion && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
+            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !(secondQuestion && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
               <moon-loader class="px-12 py-4" :loading="loading" color="#FFF5F5" size="25px"></moon-loader>
               <p class="px-8 py-4" v-if="!loading">Pay Now</p>
             </button>
@@ -60,6 +60,7 @@
         </div>
       </div>
       <!-- End Buttons -->
+  </validation-observer>
 
 </div>
 </template>
@@ -67,6 +68,9 @@
 <script>
 
 import { mapState, mapGetters } from 'vuex'
+
+
+import { ValidationObserver } from 'vee-validate';
 
 import DepositFullSelect from './Elements/DepositFullSelect.vue'
 import BillingFields from './Elements/BillingFields.vue'
@@ -78,6 +82,7 @@ import { MoonLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 export default {
   props: ['loading'],
   components:{
+    'validation-observer' : ValidationObserver,
     'deposit-full-select': DepositFullSelect,
     'billing-fields': BillingFields,
     'billing-address-fields': BillingAddressFields,
@@ -94,10 +99,7 @@ export default {
     ...mapGetters('courseInformation', [
       'hasSecondQuestion',
     ]),
-    ...mapGetters('formData', [
-      'cardType'
-    ]),
-      },
+  },
   methods: {
     onSubmit: function () {
       if (this.secondQuestion && this.termsOfService && !this.loading){
