@@ -107,7 +107,7 @@ export default {
     },
     submit: function(event) {
       this.$store.commit('checkoutData/updateLoading', true);
-      // ********** Call sumbint request *********
+      this.$store.dispatch('formData/submitData');
     }
   },
   computed: {

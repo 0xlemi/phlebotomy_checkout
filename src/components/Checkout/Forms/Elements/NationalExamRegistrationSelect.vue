@@ -3,7 +3,7 @@
   <!-- National Exam Registration -->
     <div class="flex mt-8">
     <!-- Deposit Button -->
-      <card-button @click.native="toggleButtonExamDates(1)" :selected="!hasNationalExam" selectedClass="bg-green-200 border-2 border-green-400  hover:bg-green-300 hover:border-green-400">
+      <card-button @click.native="toggleButtonExamDates(1)" :selected="hasNationalExam" selectedClass="bg-green-200 border-2 border-green-400  hover:bg-green-300 hover:border-green-400">
         <template v-slot:title>Register</template>
         <template v-slot:header>National Exam Fee</template>
         <template v-slot:text>
@@ -13,7 +13,7 @@
       <!-- End Deposit Button -->
     </div>
 
-    <div v-if="!hasNationalExam" class="mt-4 block text-red-900 ">
+    <div v-if="hasNationalExam" class="mt-4 block text-red-900 ">
       <span class="font-bold">Select a Date</span>
       <div class="mt-4">
         <div class="mt-2" v-for="(item, index) in examDates">

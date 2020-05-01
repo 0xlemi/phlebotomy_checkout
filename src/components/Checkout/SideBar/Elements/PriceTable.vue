@@ -25,7 +25,7 @@
         <td class="border px-4 py-2">{{ name }}</td>
         <td class="border px-4 py-2">$ {{ courseCost - 250 }}</td>
       </tr>
-      <tr v-if="!hasNationalExam">
+      <tr v-if="!(state == 'TN') || hasNationalExam">
         <td class="border px-4 py-2">Exam Fee</td>
         <td class="border px-4 py-2">$ {{ examFeeCost }}</td>
       </tr>
@@ -36,7 +36,7 @@
 
       <tr :class="[ payFull ? 'text-gray-800 bg-gray-100 font-semibold': 'line-through text-gray-600' ]" class="">
         <td class="border px-4 py-2">Total</td>
-        <td class="border px-4 py-2">$ {{ totalPrice + (this.hasNationalExam ? 0 : 100) }}</td>
+        <td class="border px-4 py-2">$ {{ totalPrice }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-gray-100 text-gray-800 font-semibold">
         <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(depositAmount)</span></td>
@@ -44,7 +44,7 @@
       </tr>
       <tr v-if="!payFull" class="bg-blue-100 text-blue-800 font-semibold">
         <td class="border px-4 py-2">Remaining Balance</td>
-        <td class="border px-4 py-2">$ {{ remainingBalance + (this.hasNationalExam ? 0 : 100) }}</td>
+        <td class="border px-4 py-2">$ {{ remainingBalance }}</td>
       </tr>
     </tbody>
   </table>

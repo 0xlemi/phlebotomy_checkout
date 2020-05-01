@@ -24,8 +24,8 @@ const mutations = {
 const getters = {
 
 
-  totalPrice: state => {
-    return state.courseCost + state.examFeeCost + state.insuranceCost;
+  totalPrice: (state, getters, rootState) => {
+    return state.courseCost + state.examFeeCost + state.insuranceCost +  (rootState.formData.hasNationalExam ? 100 : 0);
   },
   remainingBalance:(state, getters) => {
     return getters.totalPrice - state.depositAmount;
@@ -98,8 +98,7 @@ const actions = {
 
   loadExamDates: async function(context, endDate) {
 
-    // axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
-    axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date=2020-04-15')
+    axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
       .then((response) => {
         let nationalExams = response.data.national_exams.map(function(object) {
           return {
