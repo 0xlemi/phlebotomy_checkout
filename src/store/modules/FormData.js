@@ -35,7 +35,7 @@ const state = {
   billingZip: '',
 
   // TN Form Data Extra
-  hasNationalExam: false,
+  hasNationalExam: true,
   nationalExamId: null
 }
 
@@ -217,7 +217,7 @@ const actions = {
         exam_payment: state.hasNationalExam, // TN If they are going to pay the national exam
         course_id: context.rootState.courseInformation.id,
         type: state.payFull ? "full" : "deposit",
-        national_exam_id: state.nationalExamId,
+        national_exam_id: (state.hasNationalExam) ? state.nationalExamId : null,
         website: "tmp.localhost"
       },
       student: {

@@ -1,8 +1,8 @@
 <template>
 <div class="">
   <!-- National Exam Registration -->
-    <div class="flex mt-8">
     <!-- Deposit Button -->
+    <!-- <div class="flex mt-8">
       <card-button @click.native="toggleButtonExamDates(1)" :selected="hasNationalExam" selectedClass="bg-green-200 border-2 border-green-400  hover:bg-green-300 hover:border-green-400">
         <template v-slot:title>Register</template>
         <template v-slot:header>National Exam Fee</template>
@@ -10,12 +10,12 @@
           This fee is optional. Only required if you choose to challenge the exam.
         </template>
       </card-button>
+    </div> -->
       <!-- End Deposit Button -->
-    </div>
 
-    <div v-if="hasNationalExam" class="mt-4 block text-red-900 ">
-      <span class="font-bold">Select a Date</span>
-      <div class="mt-4">
+    <div v-if="hasNationalExam" class="mt-8 block text-red-900 ">
+      <span class="font-bold text-xl">Select a Date for your National Exam</span>
+      <div class="mt-8">
         <div class="mt-2" v-for="(item, index) in examDates">
           <label class="inline-flex items-center">
             <input type="radio" class="form-radio h-5 w-5 text-red-700" name="radio" v-model="nationalExamId" :value="item.id" checked>
