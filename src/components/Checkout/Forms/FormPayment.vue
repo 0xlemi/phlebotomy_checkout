@@ -52,7 +52,7 @@
         </div>
         <div class="flex-1">
           <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !(secondQuestion && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
+            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !((secondQuestion || !hasSecondQuestion) && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
               <moon-loader class="px-12 py-4" :loading="loading" color="#FFF5F5" size="25px"></moon-loader>
               <p class="px-8 py-4" v-if="!loading">Pay Now</p>
             </button>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <!-- End Buttons -->
-      
+
   </validation-observer>
 
 </div>
@@ -103,7 +103,7 @@ export default {
   },
   methods: {
     onSubmit: function () {
-      if (this.secondQuestion && this.termsOfService && !this.loading){
+      if ((this.secondQuestion || !this.hasSecondQuestion) && this.termsOfService && !this.loading){
         this.$emit('next');
       }
     },
@@ -114,7 +114,7 @@ export default {
   data: function(){
     return {
       termsOfService: false,
-      secondQuestion: !this.hasSecondQuestion
+      secondQuestion: false
     }
   }
 }
