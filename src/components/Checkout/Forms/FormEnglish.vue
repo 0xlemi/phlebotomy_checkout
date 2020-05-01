@@ -24,7 +24,7 @@
   <!-- End Buttons -->
 
 
-<english-message class="lg:hidden p-8" color="red" v-if="!values.firstTest"></english-message>
+<english-message class="lg:hidden p-8" color="red" v-if="!firstTest"></english-message>
 
 </div>
 </template>
@@ -32,22 +32,28 @@
 <script>
 import EnglishMessage from '@/components/Checkout/SideBar/Elements/EnglishMessage.vue'
 
+import { mapState } from 'vuex'
+
 export default {
-  props: ['values'],
   components: {
     'english-message' : EnglishMessage,
+  },
+  computed: {
+    ...mapState('formData', [
+      'firstTest'
+    ]),
   },
   methods: {
     clickYes: function (event) {
       this.yes = true;
       this.no = false;
-      this.values.firstTest = true;
+      this.$store.commit('formData/updateFirstTest', true);
       this.$emit('next');
     },
     clickNo: function (event) {
       this.yes = false;
       this.no = true;
-      this.values.firstTest = false;
+      this.$store.commit('formData/updateFirstTest', false);
     }
   },
   data: function (){

@@ -129,18 +129,11 @@ export default {
     ...mapGetters('formData', [
       'formatedNumber',
       'formatedDob'
-      // 'formatedExp'
     ]),
     ...mapGetters('courseInformation', [
       'totalPrice',
       'hasIntroQuestion'
     ]),
-    // exp: function() {
-    //   if(this.values.form4.exp.length == 4){
-    //     return this.values.form2.dob.match(/(\d{2})(\d{2})/);
-    //   }
-    //   return false;
-    // },
   },
 mounted: function() {
     // Get Curse Information From Server
