@@ -24,15 +24,22 @@
 
     <h4 class="mt-6 text-gray-800 text-lg">Payments</h4>
     <p class="mt-2">
-      To make payments please log into your account <a class="hover:text-blue-700 text-blue-500 underline font-bold" :href="this.values.link" target="_blank">here</a> or contact student services at <span class="font-bold">888-531-8378.</span>
+      To make payments please log into your account <a class="hover:text-blue-700 text-blue-500 underline font-bold" :href="link" target="_blank">here</a> or contact student services at <span class="font-bold">888-531-8378.</span>
     </p>
 
   </div>
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
-  props: ['values']
+  computed: {
+    ...mapState('responseData', [
+      'link'
+    ])
+  }
 }
 </script>
 

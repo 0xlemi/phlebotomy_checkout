@@ -200,8 +200,17 @@ const getters = {
 const actions = {
 
   submitData: async function(context) {
-    
-    axios.post(process.env.VUE_APP_API_URL+'api/registration/process', {
+    let isTN = context.rootState.courseInformation.state == 'TN';
+    if(isTN){
+      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/tn_registration_payment/process');
+    }else{
+      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/registration/process');
+    }
+  },
+
+  basicRequest: async function(context, payload) {
+
+    axios.post(payload, {
       payment: {
         amount: state.payFull ? context.rootGetters['courseInformation/totalPrice'] : context.rootState.courseInformation.depositAmount,
         payment_type: "card",
@@ -237,13 +246,13 @@ const actions = {
         code: state.code,
         type: state.type,
         same_billing: state.sameBilling,
-        billing_address: {
-          address: state.billingAddress1,
-          address2: state.billingAddress2,
-          city: state.billingCity,
-          state: state.billingState,
-          zip: state.billingZip
-        }
+      },
+      billing_address: {
+        address: state.billingAddress1,
+        address2: state.billingAddress2,
+        city: state.billingCity,
+        state: state.billingState,
+        zip: state.billingZip
       }
     })
     .then(response => {
@@ -281,7 +290,7 @@ const actions = {
 
       context.commit('checkoutData/updateLoading', false, {root:true} );
     });
-  }
+  },
 
 };
 
