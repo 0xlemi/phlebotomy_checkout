@@ -1,5 +1,5 @@
 <template>
-<div class="">
+<div v-if="valid">
 
     <english-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'CA')"></english-message>
 
@@ -36,6 +36,7 @@ export default {
       firstTest: 'firstTest',
     }),
     ...mapState('courseInformation', {
+      valid: 'valid',
       courseState: 'state',
     }),
   }
