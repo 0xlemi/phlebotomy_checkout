@@ -63,7 +63,7 @@ const actions = {
 
             if (state.state == 'TN') {
               state.availableForPayment = data.available_for_payment;
-              context.dispatch('loadExamDates', data.end_date);
+              context.dispatch('loadExamDates', courseId);
             }
 
             // ***************** Comented out for testing ***************88
@@ -96,9 +96,9 @@ const actions = {
 
   },
 
-  loadExamDates: async function(context, endDate) {
+  loadExamDates: async function(context, courseId) {
 
-    axios.get(process.env.VUE_APP_API_URL+'api/city/nashville/national_exams?start_date='+ endDate)
+    axios.get(process.env.VUE_APP_API_URL+'api/course/'+ courseId +'/national_exams')
       .then((response) => {
         let nationalExams = response.data.national_exams.map(function(object) {
           return {
