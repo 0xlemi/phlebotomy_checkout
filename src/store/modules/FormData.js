@@ -244,7 +244,7 @@ const actions = {
         expiration_month: context.getters.explodedExp ? context.getters.explodedExp[1] : '',
         expiration_year: context.getters.explodedExp ? '20'+context.getters.explodedExp[2] : '',
         code: state.code,
-        type: state.type,
+        type: context.getters.cardType.name,
         same_billing: state.sameBilling,
       },
       billing_address: {
