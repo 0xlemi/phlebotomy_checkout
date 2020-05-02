@@ -32,6 +32,8 @@
         <div  class="w-full p-6 bg-red-200 text-red-900 border-red-400 border rounded-lg ">
           <div class="flex">
             <div class="mr-6">
+              <p class="font-bold">Enrollment Id</p>
+              <p class="font-bold">Student Id</p>
               <p class="font-bold">Class</p>
               <p class="font-bold">Dates</p>
               <p class="font-bold">Location</p>
@@ -39,6 +41,8 @@
 
             </div>
             <div>
+              <p>{{ enrollmentId }}</p>
+              <p>{{ studentId }}</p>
               <p>National Phlebotomy Training</p>
               <p>
                 {{ dateStart}} - {{dateEnd}}
@@ -77,6 +81,8 @@ export default {
   computed: {
     ...mapState('responseData', [
       'link',
+      'enrollmentId',
+      'studentId',
       'dateStart',
       'dateEnd',
       'timeStart',

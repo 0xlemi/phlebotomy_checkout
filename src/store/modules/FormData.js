@@ -22,10 +22,10 @@ const state = {
 
   // ***** Form4 *******
   payFull: false,
-  billingName: '',
-  billingNumber: '',
-  exp: '',
-  code: '',
+  billingName: 'jon sanchez',
+  billingNumber: '4111111111111111',
+  exp: '0322',
+  code: '123',
   // type is in getter
   sameBilling: "true", // Is easier to use a string for radio buttons
   billingAddress1: '',
@@ -258,14 +258,16 @@ const actions = {
     .then(response => {
       if(response.data.success == true){
         // Set information for the successMessage page
-        let data = response.data.enrollment.course;
+        let data = response.data.enrollment;
 
-        context.commit('responseData/updateLink', "https://students.phlebotomyusa.com/account/student/" + data.city.token, {root:true} );
-        context.commit('responseData/updateDateStart', data.modules.distribution[0], {root:true} );
-        context.commit('responseData/updateDateEnd', data.modules.distribution[data.modules.distribution.length - 1], {root:true} );
-        context.commit('responseData/updateTimeStart', data.modules.distribution[0], {root:true} );
-        context.commit('responseData/updateTimeEnd', data.hours_end, {root:true} );
-        context.commit('responseData/updateCity', data.city.map_city, {root:true} );
+        context.commit('responseData/updateLink', "https://students.phlebotomyusa.com/account/student/" + data.course.city.token, {root:true} );
+        context.commit('responseData/updateEnrollmentId', data.id, {root:true} );
+        context.commit('responseData/updateStudentId', data.student_id, {root:true} );
+        context.commit('responseData/updateDateStart', data.course.start_date, {root:true} );
+        context.commit('responseData/updateDateEnd', data.course.end_date , {root:true} );
+        context.commit('responseData/updateTimeStart', data.course.hours_start, {root:true} );
+        context.commit('responseData/updateTimeEnd', data.course.hours_end, {root:true} );
+        context.commit('responseData/updateCity', data.course.city.name, {root:true} );
 
         context.commit('checkoutData/incrementCurrentForm', null, {root:true} );
       }

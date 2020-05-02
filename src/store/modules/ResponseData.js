@@ -1,6 +1,8 @@
 // initial state
 const state = {
   link: '',
+  enrollmentId: '',
+  studentId: '',
   dateStart: '',
   dateEnd: '',
   timeStart: '',
@@ -10,6 +12,13 @@ const state = {
 
 // getters
 const getters = {
+
+  // formatedStartDate: (state, getters) => {
+  //   let date = new Date(state.dateStart);
+  // },
+  // formatedEndDate: (state, getters) => {
+  //
+  // }
 
 }
 
@@ -23,6 +32,12 @@ const mutations = {
 
   updateLink(state, payload) {
     state.link = payload;
+  },
+  updateEnrollmentId(state, payload) {
+    state.enrollmentId = payload;
+  },
+  updateStudentId(state, payload) {
+    state.studentId = payload;
   },
   updateDateStart(state, payload) {
     state.dateStart = payload;

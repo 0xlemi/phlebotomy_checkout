@@ -9,7 +9,7 @@
 
     <information-card :currentForm="currentForm"></information-card>
 
-    <success-message-side-bar :values="responseData"v-if="currentForm == 5" class="p-8"></success-message-side-bar>
+    <success-message-side-bar v-if="currentForm == 5" class="p-8"></success-message-side-bar>
 </div>
 </template>
 
