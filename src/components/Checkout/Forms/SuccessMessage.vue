@@ -45,7 +45,7 @@
               <p>{{ studentId }}</p>
               <p>National Phlebotomy Training</p>
               <p>
-                {{ dateStart}} - {{dateEnd}}
+                {{ dateStart |  moment('L') }} - {{dateEnd | moment('L') }}
               </p>
               <p>{{ city }}</p>
               <p>{{ timeStart }} - {{ timeEnd }}</p>
