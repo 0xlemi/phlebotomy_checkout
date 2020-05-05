@@ -1,9 +1,13 @@
 <template>
 <div v-if="valid">
 
-    <english-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'CA')"></english-message>
+    <side-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'CA')">
+      <ca-message></ca-message>
+    </side-message>
 
-    <transcript-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'TN')"></transcript-message>
+    <side-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'TN')">
+      <tn-message></tn-message>
+    </side-message>
 
     <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5"></price-table>
 
@@ -16,8 +20,9 @@
 <script>
 import { mapState } from 'vuex'
 
-import EnglishMessage from './Elements/EnglishMessage.vue'
-import TranscriptMessage from './Elements/TranscriptMessage.vue'
+import SideMessage from './Elements/SideMessage.vue'
+import CAMessage from './Elements/Messages/CAMessage.vue'
+import TNMessage from './Elements/Messages/TNMessage.vue'
 import PriceTable from './Elements/PriceTable.vue'
 import SuccessMessageSideBar from './Elements/SuccessMessageSideBar.vue'
 import InformationCard from './Elements/InformationCard.vue'
@@ -25,8 +30,9 @@ import InformationCard from './Elements/InformationCard.vue'
 export default {
   props: ['currentForm'],
   components: {
-    'english-message' : EnglishMessage,
-    'transcript-message' : TranscriptMessage,
+    'side-message' : SideMessage,
+    'ca-message' : CAMessage,
+    'tn-message' : TNMessage,
     'price-table' : PriceTable,
     'success-message-side-bar' : SuccessMessageSideBar,
     'information-card' : InformationCard

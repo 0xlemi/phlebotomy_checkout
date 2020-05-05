@@ -28,19 +28,40 @@
   <!-- End Buttons -->
 
 
-  <p class="mt-6 text-red-800">
-    The <span class="font-bold">Tennessee Higher Education Commission</span> rule 1540-01-02.12 and 1540-01-02.15 <span class="font-bold">requires</span> students prior to commencement of class to submit an <span class="font-bold">official transcript from the high school, GED score sheet </span>from the appropriate issuing entity, or an <span class="font-bold">official military document </span>indicating that the student completed high school such as an Enlisted Record Brief.
-  </p>
-  <p class="mt-6 text-red-800">
-    This must come directly from the issuing institution or agency. Paper transcripts printed on security sensitive paper and must contain the issuing institution’s seal or signature of an official from the institution. Electronic transcripts or scores sheets are also acceptable if sent from the issuing institution.
-  </p>
+  <side-message color="red" class="lg:hidden p-8" v-if="!firstTest">
+    <tn-message></tn-message>
+  </side-message>
+
+
+  <div class="mx-6 mb-32 lg:mb-0 text-red-800">
+    <p class="mt-6">
+      The <span class="font-bold">Tennessee Higher Education Commission</span> rule 1540-01-02.12 and 1540-01-02.15 <span class="font-bold">requires</span> students prior to commencement of class to submit an <span class="font-bold">official transcript from the high school, GED score sheet </span>from the appropriate issuing entity, or an <span class="font-bold">official military document </span>indicating that the student completed high school such as an Enlisted Record Brief.
+    </p>
+    <p class="mt-6">
+      This must come directly from the issuing institution or agency. Paper transcripts printed on security sensitive paper and must contain the issuing institution’s seal or signature of an official from the institution. Electronic transcripts or scores sheets are also acceptable if sent from the issuing institution.
+    </p>
+  </div>
 
 
 </div>
 </template>
 
 <script>
+import SideMessage from '@/components/Checkout/SideBar/Elements/SideMessage.vue'
+import TNMessage from '@/components/Checkout/SideBar/Elements/Messages/TNMessage.vue'
+
+import { mapState } from 'vuex'
+
 export default {
+  components: {
+    'side-message' : SideMessage,
+    'tn-message' : TNMessage,
+  },
+  computed: {
+    ...mapState('formData', [
+      'firstTest'
+    ]),
+  },
   methods: {
     clickYes: function (event) {
       this.yes = true;

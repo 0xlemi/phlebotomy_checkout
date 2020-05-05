@@ -34,7 +34,7 @@
       </div>
       <!-- End Desktop Menu -->
       <!-- Mobile Menu -->
-      <div v-if="hamburgerButton" class="w-full ">
+      <div v-if="hamburgerButton" class="w-full lg:hidden">
           <div class="text-md mt-4">
               <a href="#responsive-header" class="hover:bg-gray-200 rounded-lg block px-4 py-3 text-gray-700 hover:text-gray-800 ">
                   LOCATIONS
