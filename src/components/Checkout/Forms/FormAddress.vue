@@ -18,7 +18,8 @@
             Address
           </label>
 
-            <vue-google-autocomplete id="map" ref="addressInput" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange" classname="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <vue-google-autocomplete id="map" placeholder="Enter Your Address" ref="addressInput" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange"
+                                     classname="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
 
         </div>
 
@@ -36,7 +37,8 @@
           </label>
 
           <validation-provider name="address2" rules="" v-slot="{ errors }">
-            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" placeholder="Apartment, suite, etc. (optional)" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
+                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -57,7 +59,8 @@
           </label>
 
           <validation-provider name="city" rules="required" v-slot="{ errors }">
-            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" placeholder="City" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
+                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -70,7 +73,8 @@
           </label>
 
           <validation-provider name="state" rules="required|alpha|length:2" v-slot="{ errors }">
-            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="AA" placeholder="State" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
+                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -82,7 +86,8 @@
           </label>
 
           <validation-provider name="zip code" rules="required|numeric|min:5|max:9" v-slot="{ errors }">
-            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="#####" placeholder="ZIP code" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
+                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>

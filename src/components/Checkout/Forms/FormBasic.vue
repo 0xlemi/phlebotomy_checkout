@@ -19,7 +19,8 @@
           </label>
 
           <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="Email"
+                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -37,7 +38,8 @@
           </label>
 
           <validation-provider name="name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="John" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="First Name"
+                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -46,11 +48,12 @@
         <div class="w-3/5 mb-3 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
-            Lastname
+            Last Name
           </label>
 
           <validation-provider name="last name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Last Name"
+                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -75,7 +78,8 @@
           </label>
 
           <validation-provider name="number" rules="required|numeric|length:10" v-slot="{ errors }">
-            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(352) 879 - 8928" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(XXX) XXX - XXXX"
+                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
