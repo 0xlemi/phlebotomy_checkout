@@ -14,7 +14,7 @@
 
     <p class="mt-8 font-bold text-lg text-red-900">
       Your Phlebotomy Student Account has been created <br> Please click
-      <a class="hover:text-blue-700 text-blue-500 underline font-bold" :href="this.values.link" target="_blank">THIS LINK</a> to confirm your account.
+      <a class="hover:text-blue-700 text-blue-500 underline font-bold" :href="link" target="_blank">THIS LINK</a> to confirm your account.
     </p>
 
     <p class="mt-8 text-red-900">
@@ -32,6 +32,8 @@
         <div  class="w-full p-6 bg-red-200 text-red-900 border-red-400 border rounded-lg ">
           <div class="flex">
             <div class="mr-6">
+              <p class="font-bold">Enrollment Id</p>
+              <p class="font-bold">Student Id</p>
               <p class="font-bold">Class</p>
               <p class="font-bold">Dates</p>
               <p class="font-bold">Location</p>
@@ -39,12 +41,14 @@
 
             </div>
             <div>
+              <p>{{ enrollmentId }}</p>
+              <p>{{ studentId }}</p>
               <p>National Phlebotomy Training</p>
               <p>
-                {{ this.values.dateStart}} - {{this.values.dateEnd}}
+                {{ dateStart |  moment('L') }} - {{dateEnd | moment('L') }}
               </p>
-              <p>{{ this.values.city }}</p>
-              <p>{{ this.values.timeStart }} - {{ this.values.timeEnd }}</p>
+              <p>{{ city }}</p>
+              <p>{{ timeStart }} - {{ timeEnd }}</p>
             </div>
           </div>
 
@@ -70,10 +74,21 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
+
 export default {
-  props: ['values']
+  computed: {
+    ...mapState('responseData', [
+      'link',
+      'enrollmentId',
+      'studentId',
+      'dateStart',
+      'dateEnd',
+      'timeStart',
+      'timeEnd',
+      'city'
+    ])
+  }
 }
 </script>
-
-<style scoped>
-</style>

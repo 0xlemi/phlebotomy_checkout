@@ -33,7 +33,7 @@
       </div>
       <!-- payment info -->
       <div v-if="currentForm > 4">
-        <p class="mt-5 -mb-2 text-sm">If this information is wrong call <span class="font-bold">888-531-8378</span></p>
+        <p class="mt-5 -mb-2 text-sm">If this information is wrong <span class="font-bold">edit in your account</span></p>
       </div>
     </div>
   </div>

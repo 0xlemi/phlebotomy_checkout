@@ -7,7 +7,7 @@ import CheckoutData from './modules/CheckoutData';
 import CourseInformation from './modules/CourseInformation';
 import ErrorMessage from './modules/ErrorMessage';
 import FormData from './modules/FormData';
-import ResponseInformation from './modules/ResponseInformation';
+import ResponseData from './modules/ResponseData';
 
 export default new Vuex.Store({
   modules: {
@@ -15,6 +15,6 @@ export default new Vuex.Store({
     courseInformation:  CourseInformation,
     errorMessage:  ErrorMessage,
     formData:  FormData,
-    responseInformation:  ResponseInformation
+    responseData:  ResponseData
   }
 })

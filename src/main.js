@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 // Third Party Libraries
 window.axios = require('axios');
 
+Vue.use(require('vue-moment'));
+
 
 new Vue({
   router,
