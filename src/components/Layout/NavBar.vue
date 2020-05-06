@@ -75,7 +75,7 @@ export default {
   },
   data: function() {
     return {
-      hamburgerButton: true
+      hamburgerButton: false
     }
   }
 

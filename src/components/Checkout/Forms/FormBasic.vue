@@ -66,9 +66,9 @@
 
 
       <!-- Number, SSN and DOB -->
-      <div class="flex mt-10">
+      <div class="md:flex mt-10">
 
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="w-full md:w-2/5 mb-3 mr-6 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Number
@@ -80,7 +80,7 @@
           </validation-provider>
         </div>
 
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="w-full md:w-2/5 mb-3 mr-6 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             DOB
@@ -92,7 +92,7 @@
           </validation-provider>
         </div>
 
-        <div class="w-1/5 mb-3 pt-0">
+        <div class="w-full md:w-1/5 mb-3 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             SSN  <a class="text-sm text-pink-800 font-normal">(last 4)</a>
@@ -109,9 +109,9 @@
 
 
       <div class="flex">
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="hidden md:block w-2/5 mb-3 mr-6 pt-0">
         </div>
-        <div class="w-3/5 mb-3 mr-6 pt-0">
+        <div class="w-full md:w-3/5 mb-3 mr-6 pt-0">
           <label class="block text-red-900 text-sm font-normal ml-2 mb-2">
             This is required for your transcripts
           </label>
