@@ -58,9 +58,9 @@
             <!-- End Address 2 -->
 
             <!-- City, State and Zip -->
-            <div class="flex mt-3">
+            <div class="md:flex md:mt-3">
 
-              <div class="w-3/6 mb-3 mr-6 pt-0">
+              <div class="md:w-3/6 mb-3 md:mr-6 pt-3 md:pt-0 ">
 
                 <validation-provider name="city" :rules="{ required : (sameBilling == 'false')  }" v-slot="{ errors }">
                   <input type="text" v-model="billingCity" :class="{ 'border-2 placeholder-red-400 border-red-500' : errors.length != 0 }" placeholder="City" class="px-3 py-4 placeholder-gray-600 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-gray-400 w-full"/>
@@ -68,7 +68,7 @@
                 </validation-provider>
               </div>
 
-              <div class="w-1/6 mb-3 mr-6 pt-0">
+              <div class="md:w-1/6 mb-3 md:mr-6 pt-3 md:pt-0">
 
                 <validation-provider name="state" :rules="{ required : (sameBilling == 'false'), length:2 }" v-slot="{ errors }">
                   <input-facade mask="AA" type="text" v-model="billingState" :class="{ 'border-2 placeholder-red-400 border-red-500' : errors.length != 0 }" placeholder="State" class="px-3 py-4 placeholder-gray-600 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-gray-400 w-full"/>
@@ -76,7 +76,7 @@
                 </validation-provider>
               </div>
 
-              <div class="w-2/6 mb-3 pt-0">
+              <div class="md:w-2/6 mb-3 pt-3 md:pt-0">
 
                 <validation-provider name="zip code" :rules="{ required : (sameBilling == 'false'), numeric: true, min:5, max:9  }" v-slot="{ errors }">
                   <input-facade mask="#####  ####" type="text" v-model="billingZip" :class="{ 'border-2 placeholder-red-400 border-red-500' : errors.length != 0 }" placeholder="Zip Code" class="px-3 py-4 placeholder-gray-600 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-gray-400 w-full"/>

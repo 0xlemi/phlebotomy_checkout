@@ -1,5 +1,5 @@
 <template>
-<div class="flex mt-8">
+<div class="md:flex mt-8">
       <!-- Deposit Button -->
       <card-button @click.native="toggleButton(1)" :selected="!payFull">
         <template v-slot:title>Pay $250 Deposit</template>
