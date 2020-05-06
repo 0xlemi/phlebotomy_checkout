@@ -88,7 +88,7 @@
 
           <validation-provider name="DOB" rules="required|numeric|length:8" v-slot="{ errors }">
             <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="MM / DD / YYYY" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
+            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ (errors[0]) ? 'invalid format (mm/dd/yyyy)': ''}}</p>
           </validation-provider>
         </div>
 

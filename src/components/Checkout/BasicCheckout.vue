@@ -97,6 +97,8 @@ export default {
       if(this.currentForm <= 4){
         this.$store.commit('checkoutData/incrementCurrentForm');
         this.$emit('changeForm', this.currentForm);
+        // Scroll to the top
+        window.scroll(0,0);
       }
     },
     back: function(event) {
