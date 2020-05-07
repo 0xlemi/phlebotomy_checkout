@@ -100,7 +100,7 @@
 <script>
 import { InputFacade } from 'vue-input-facade';
 
-import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 
 export default {
   components: {

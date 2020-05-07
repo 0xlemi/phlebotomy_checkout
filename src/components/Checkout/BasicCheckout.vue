@@ -67,6 +67,10 @@
 import { mapState, mapMutations, mapGetters } from 'vuex'
 
 
+import { setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+
+setInteractionMode('eager');
+
 import ProgressBar from './Elements/ProgressBar.vue'
 import ErrorMessage from './Elements/ErrorMessage.vue'
 

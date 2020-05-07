@@ -1,6 +1,6 @@
 // initial state
 const state = {
-  currentForm: 4,
+  currentForm: 3,
   loading: false
 }
 

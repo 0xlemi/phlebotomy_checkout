@@ -27,9 +27,9 @@
 
 
       <!-- Address 2 -->
-      <div class="flex mt-8">
+      <div class="flex mt-4 md:mt-8">
 
-        <div class="w-full mb-3 pt-0">
+        <div class="w-full md:mb-3 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Address Field 2 (optional)
@@ -48,9 +48,9 @@
 
 
       <!-- City, State and Zip -->
-      <div class="flex mt-8">
+      <div class="md:flex mt-4 md:mt-8 pb-3">
 
-        <div class="w-3/6 mb-3 mr-6 pt-0">
+        <div class="md:w-3/6 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             City
@@ -63,7 +63,7 @@
 
         </div>
 
-        <div class="w-1/6 mb-3 mr-6 pt-0">
+        <div class="md:w-1/6 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             State
@@ -75,7 +75,7 @@
           </validation-provider>
         </div>
 
-        <div class="w-2/6 mb-3 pt-0">
+        <div class="md:w-2/6 mb-3 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Zip code
@@ -107,10 +107,8 @@ import NextBackButtons from './Elements/NextBackButtons.vue'
 
 import { InputFacade } from 'vue-input-facade'
 
-import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
-
-setInteractionMode('passive');
 
 export default {
   components: {
