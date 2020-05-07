@@ -198,6 +198,9 @@ export default {
         }
       }
     },
+    mounted: function() {
+      this.$refs.addressInput.update(this.$store.state.formData.address);
+    },
     data: function () {
       return {
         addressInput: ""
