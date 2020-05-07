@@ -118,22 +118,8 @@
         </div>
       </div>
 
-      <!-- Buttons -->
-      <div class="flex mt-10 mb-10">
-        <div v-if="hasIntroQuestion" class="flex-1">
-          <button @click="back" type="button" class="underline focus:outline-none text-red-800 font-semibold hover:text-red-600 py-2 px-4">
-             Go Back
-          </button>
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" class="bg-red-800 focus:outline-none hover:bg-red-900 ml-6 text-white font-bold py-3 px-8 rounded">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- End Buttons -->
+      <next-back-buttons v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      </next-back-buttons>
 
   </validation-observer>
 
@@ -142,6 +128,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+
+import NextBackButtons from './Elements/NextBackButtons.vue'
+
 import { InputFacade } from 'vue-input-facade'
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
@@ -151,6 +140,7 @@ setInteractionMode('passive');
 export default {
   props: ['values', 'hasIntroQuestion'],
   components:{
+    'next-back-buttons': NextBackButtons,
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
     'validation-observer' : ValidationObserver

@@ -90,22 +90,10 @@
       </div>
       <!-- End City, State and Zip -->
 
-      <!-- Buttons -->
-      <div class="flex mt-10 mb-10">
-        <div class="flex-1">
-          <button @click="back" type="button" class="focus:outline-none underline text-red-800 font-semibold hover:text-red-600 py-2 px-4">
-             Go Back
-          </button>
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" class="focus:outline-none bg-red-800 hover:bg-red-900 ml-6 text-white font-bold py-3 px-8 rounded">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- End Buttons -->
+
+      <next-back-buttons v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      </next-back-buttons>
+
 
   </validation-observer>
 
@@ -114,6 +102,9 @@
 
 <script>
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
+
+import NextBackButtons from './Elements/NextBackButtons.vue'
+
 import { InputFacade } from 'vue-input-facade'
 
 import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
@@ -124,6 +115,7 @@ setInteractionMode('passive');
 export default {
   components: {
     'vue-google-autocomplete': VueGoogleAutocomplete,
+    'next-back-buttons': NextBackButtons,
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
     'validation-observer' : ValidationObserver

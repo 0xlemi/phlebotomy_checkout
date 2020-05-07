@@ -43,23 +43,9 @@
       </div>
       <!-- End Terms of Service -->
 
-      <!-- Buttons -->
-      <div class="flex mt-10 mb-10">
-        <div class="flex-1">
-          <button @click="back" type="button" class="underline focus:outline-none  text-red-800 font-semibold hover:text-red-600 py-2 px-4">
-             Go Back
-          </button>
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" :class="{ 'opacity-50 cursor-not-allowed' : !((secondQuestion || !hasSecondQuestion) && termsOfService && !loading) }" class=" focus:outline-none bg-red-800 hover:bg-red-900 text-white font-bold rounded">
-              <moon-loader class="px-12 py-4" :loading="loading" color="#FFF5F5" size="25px"></moon-loader>
-              <p class="px-8 py-4" v-if="!loading">Pay Now</p>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- End Buttons -->
+
+      <next-back-buttons :next-blocked="!ready" :loading="loading" next-text="Pay Now" v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      </next-back-buttons>
 
   </validation-observer>
 
@@ -70,15 +56,13 @@
 
 import { mapState, mapGetters } from 'vuex'
 
-
 import { ValidationObserver } from 'vee-validate';
 
 import DepositFullSelect from './Elements/DepositFullSelect.vue'
 import BillingFields from './Elements/BillingFields.vue'
 import BillingAddressFields from './Elements/BillingAddressFields.vue'
+import NextBackButtons from './Elements/NextBackButtons.vue'
 import NationalExamRegistrationSelect from './Elements/NationalExamRegistrationSelect.vue'
-
-import { MoonLoader } from 'vue-spinner/dist/vue-spinner.min.js'
 
 export default {
   props: ['loading'],
@@ -87,8 +71,8 @@ export default {
     'deposit-full-select': DepositFullSelect,
     'billing-fields': BillingFields,
     'billing-address-fields': BillingAddressFields,
+    'next-back-buttons': NextBackButtons,
     'national-exam-registration-select': NationalExamRegistrationSelect,
-    'moon-loader' : MoonLoader
   },
   computed: {
     ...mapState('courseInformation', [
@@ -100,10 +84,13 @@ export default {
     ...mapGetters('courseInformation', [
       'hasSecondQuestion',
     ]),
+    ready: function() {
+      return ((this.secondQuestion || !this.hasSecondQuestion) && this.termsOfService && !this.loading)
+    }
   },
   methods: {
     onSubmit: function () {
-      if ((this.secondQuestion || !this.hasSecondQuestion) && this.termsOfService && !this.loading){
+      if (this.ready){
         this.$emit('next');
       }
     },
