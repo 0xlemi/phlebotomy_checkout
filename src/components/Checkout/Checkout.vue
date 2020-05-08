@@ -54,7 +54,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <default-side-bar :current-form="currentForm"></default-side-bar>
+    <side-bar :current-form="currentForm"></side-bar>
 
   </div>
   <!-- End right side of checkout -->
@@ -81,7 +81,7 @@ import FormAddress from './Forms/FormAddress.vue'
 import FormPayment from './Forms/FormPayment.vue'
 import SuccessMessage from './Forms/SuccessMessage.vue'
 
-import DefaultSideBar from './SideBar/DefaultSideBar.vue'
+import SideBar from './SideBar/SideBar.vue'
 
 export default {
   components: {
@@ -94,7 +94,7 @@ export default {
     'form-payment' : FormPayment,
     'success-message' : SuccessMessage,
 
-    'default-side-bar': DefaultSideBar
+    'side-bar': SideBar
   },
   methods: {
     next: function(event) {

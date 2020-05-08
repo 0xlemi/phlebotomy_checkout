@@ -4,9 +4,11 @@
     National Exam Dates
   </h3>
 
-  <hr class="border-red-300 mt-5">
+  <hr class="hidden lg:block border-red-300 mt-5">
 
     <!-- Payment Fields -->
+
+    <mobile-price-table class="mt-6 lg:hidden"></mobile-price-table>
 
     <validation-observer v-slot="{ handleSubmit}">
 
@@ -58,6 +60,7 @@ import { mapState, mapGetters } from 'vuex'
 
 import { ValidationObserver } from 'vee-validate';
 
+import MobilePriceTable from '@/components/Checkout/SideBar/Elements/MobilePriceTable.vue'
 import DepositFullSelect from './Elements/DepositFullSelect.vue'
 import BillingFields from './Elements/BillingFields.vue'
 import BillingAddressFields from './Elements/BillingAddressFields.vue'
@@ -68,6 +71,7 @@ export default {
   props: ['loading'],
   components:{
     'validation-observer' : ValidationObserver,
+    'mobile-price-table' : MobilePriceTable,
     'deposit-full-select': DepositFullSelect,
     'billing-fields': BillingFields,
     'billing-address-fields': BillingAddressFields,
