@@ -2,7 +2,7 @@
 <div class="md:flex mt-8">
       <!-- Deposit Button -->
       <card-button @click.native="toggleButton(1)" :selected="!payFull">
-        <template v-slot:title>Pay $250 Deposit</template>
+        <template v-slot:title>Pay ${{ depositAmount }} Deposit</template>
         <template v-slot:header>Non-refundable</template>
         <template v-slot:text>
           If your tuition is paid by a 3rd party call <span class="font-bold">888-531-8378 </span>to register over the phone.
@@ -13,7 +13,7 @@
       <!-- Full Button -->
       <card-button @click.native="toggleButton(2)" :selected="payFull">
         <template v-slot:title>Pay in Full</template>
-        <template v-slot:header>$250 Non-refundable</template>
+        <template v-slot:header>${{ depositAmount }} Non-refundable</template>
         <template v-slot:text>
           Pay Tuition, Insurance and Exam Fee in Full.
         </template>
@@ -25,6 +25,8 @@
 
 <script>
 
+import { mapState, mapGetters } from 'vuex'
+
 import CardButton from '@/components/Checkout/Elements/CardButton.vue'
 
 export default {
@@ -32,6 +34,9 @@ export default {
     'card-button': CardButton
   },
   computed: {
+    ...mapState('courseInformation', [
+      'depositAmount'
+    ]),
     payFull: {
       get () {
         return this.$store.state.formData.payFull;
