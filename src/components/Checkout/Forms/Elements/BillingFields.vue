@@ -1,9 +1,9 @@
 <template>
 <div >
   <!-- Number, Exp and CVC -->
-  <div class="flex mt-8">
+  <div class="md:flex mt-8">
 
-    <div class="w-7/12 mb-3 mr-6 pt-0">
+    <div class="md:w-7/12 mb-3 md:mr-6 pt-0">
 
        <label class="block text-red-900 text-md font-bold ml-2 mb-2">
         Card Number
@@ -19,7 +19,7 @@
       </validation-provider>
     </div>
 
-    <div class="w-3/12 mb-3 mr-6 pt-0">
+    <div class="md:w-3/12 mb-3 md:mr-6 pt-3 md:pt-0">
 
        <label class="block text-red-900 text-md font-bold ml-2 mb-2">
         Exp.
@@ -31,7 +31,7 @@
       </validation-provider>
     </div>
 
-    <div class="w-2/12 mb-3 pt-0">
+    <div class="md:w-2/12 mb-3 pt-3  md:pt-0">
 
        <label class="block text-red-900 text-md font-bold ml-2 mb-2">
         CVC
@@ -72,7 +72,7 @@
 import {  mapGetters } from 'vuex'
 
 import { InputFacade } from 'vue-input-facade';
-import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 
 export default {
   components: {

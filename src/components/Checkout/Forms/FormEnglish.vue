@@ -24,19 +24,23 @@
   <!-- End Buttons -->
 
 
-<english-message class="lg:hidden p-8" color="red" v-if="!firstTest"></english-message>
+<side-message color="red" class="lg:hidden  p-8" v-if="!firstTest">
+  <ca-message></ca-message>
+</side-message>
 
 </div>
 </template>
 
 <script>
-import EnglishMessage from '@/components/Checkout/SideBar/Elements/EnglishMessage.vue'
+import SideMessage from '@/components/Checkout/SideBar/Elements/SideMessage.vue'
+import CAMessage from '@/components/Checkout/SideBar/Elements/Messages/CAMessage.vue'
 
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    'english-message' : EnglishMessage,
+    'side-message' : SideMessage,
+    'ca-message' : CAMessage,
   },
   computed: {
     ...mapState('formData', [

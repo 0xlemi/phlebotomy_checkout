@@ -13,13 +13,6 @@ const state = {
 // getters
 const getters = {
 
-  // formatedStartDate: (state, getters) => {
-  //   let date = new Date(state.dateStart);
-  // },
-  // formatedEndDate: (state, getters) => {
-  //
-  // }
-
 }
 
 // actions

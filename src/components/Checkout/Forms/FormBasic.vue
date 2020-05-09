@@ -19,8 +19,7 @@
           </label>
 
           <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="Email"
-                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -38,8 +37,7 @@
           </label>
 
           <validation-provider name="name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="First Name"
-                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="John" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -48,12 +46,11 @@
         <div class="w-3/5 mb-3 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
-            Last Name
+            Lastname
           </label>
 
           <validation-provider name="last name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Last Name"
-                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -69,22 +66,21 @@
 
 
       <!-- Number, SSN and DOB -->
-      <div class="flex mt-10">
+      <div class="md:flex mt-10">
 
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="md:w-2/5 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Number
           </label>
 
           <validation-provider name="number" rules="required|numeric|length:10" v-slot="{ errors }">
-            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(XXX) XXX - XXXX"
-                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(XXX) XXX - XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
 
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="md:w-2/5 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             DOB
@@ -92,11 +88,11 @@
 
           <validation-provider name="DOB" rules="required|numeric|length:8" v-slot="{ errors }">
             <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="MM / DD / YYYY" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
+            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ (errors[0]) ? 'invalid format (mm/dd/yyyy)': ''}}</p>
           </validation-provider>
         </div>
 
-        <div class="w-1/5 mb-3 pt-0">
+        <div class="md:w-1/5 mb-3 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             SSN  <a class="text-sm text-pink-800 font-normal">(last 4)</a>
@@ -113,31 +109,17 @@
 
 
       <div class="flex">
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="hidden md:block w-2/5 mb-3 mr-6 pt-0">
         </div>
-        <div class="w-3/5 mb-3 mr-6 pt-0">
+        <div class="w-full md:w-3/5 mb-3 mr-6 pt-0">
           <label class="block text-red-900 text-sm font-normal ml-2 mb-2">
             This is required for your transcripts
           </label>
         </div>
       </div>
 
-      <!-- Buttons -->
-      <div class="flex mt-10 mb-10">
-        <div v-if="hasIntroQuestion" class="flex-1">
-          <button @click="back" type="button" class="underline focus:outline-none text-red-800 font-semibold hover:text-red-600 py-2 px-4">
-             Go Back
-          </button>
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" class="bg-red-800 focus:outline-none hover:bg-red-900 ml-6 text-white font-bold py-3 px-8 rounded">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- End Buttons -->
+      <next-back-buttons v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      </next-back-buttons>
 
   </validation-observer>
 
@@ -146,15 +128,18 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+
+import NextBackButtons from './Elements/NextBackButtons.vue'
+
 import { InputFacade } from 'vue-input-facade'
-import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
 
-setInteractionMode('passive');
 
 export default {
   props: ['values', 'hasIntroQuestion'],
   components:{
+    'next-back-buttons': NextBackButtons,
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
     'validation-observer' : ValidationObserver

@@ -18,8 +18,7 @@
             Address
           </label>
 
-            <vue-google-autocomplete id="map" placeholder="Enter Your Address" ref="addressInput" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange"
-                                     classname="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <vue-google-autocomplete id="map" ref="addressInput" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange" classname="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
 
         </div>
 
@@ -28,17 +27,16 @@
 
 
       <!-- Address 2 -->
-      <div class="flex mt-8">
+      <div class="flex mt-4 md:mt-8">
 
-        <div class="w-full mb-3 pt-0">
+        <div class="w-full md:mb-3 pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Address Field 2 (optional)
           </label>
 
           <validation-provider name="address2" rules="" v-slot="{ errors }">
-            <input type="text" placeholder="Apartment, suite, etc. (optional)" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
-                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -50,44 +48,41 @@
 
 
       <!-- City, State and Zip -->
-      <div class="flex mt-8">
+      <div class="md:flex mt-4 md:mt-8 pb-3">
 
-        <div class="w-3/6 mb-3 mr-6 pt-0">
+        <div class="md:w-3/6 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             City
           </label>
 
           <validation-provider name="city" rules="required" v-slot="{ errors }">
-            <input type="text" placeholder="City" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
-                   class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
         </div>
 
-        <div class="w-1/6 mb-3 mr-6 pt-0">
+        <div class="md:w-1/6 mb-3 md:mr-6 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             State
           </label>
 
           <validation-provider name="state" rules="required|alpha|length:2" v-slot="{ errors }">
-            <input-facade mask="AA" placeholder="State" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
-                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
 
-        <div class="w-2/6 mb-3 pt-0">
+        <div class="md:w-2/6 mb-3 pt-3 md:pt-0">
 
            <label class="block text-red-900 text-md font-bold ml-2 mb-2">
             Zip code
           </label>
 
           <validation-provider name="zip code" rules="required|numeric|min:5|max:9" v-slot="{ errors }">
-            <input-facade mask="#####" placeholder="ZIP code" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"
-                          class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
@@ -95,22 +90,10 @@
       </div>
       <!-- End City, State and Zip -->
 
-      <!-- Buttons -->
-      <div class="flex mt-10 mb-10">
-        <div class="flex-1">
-          <button @click="back" type="button" class="focus:outline-none underline text-red-800 font-semibold hover:text-red-600 py-2 px-4">
-             Go Back
-          </button>
-        </div>
-        <div class="flex-1">
-          <div class="flex justify-end">
-            <button @click="handleSubmit(onSubmit)" type="submit" class="focus:outline-none bg-red-800 hover:bg-red-900 ml-6 text-white font-bold py-3 px-8 rounded">
-              Next
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- End Buttons -->
+
+      <next-back-buttons v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      </next-back-buttons>
+
 
   </validation-observer>
 
@@ -119,16 +102,18 @@
 
 <script>
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
+
+import NextBackButtons from './Elements/NextBackButtons.vue'
+
 import { InputFacade } from 'vue-input-facade'
 
-import { ValidationProvider, setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
-
-setInteractionMode('passive');
 
 export default {
   components: {
     'vue-google-autocomplete': VueGoogleAutocomplete,
+    'next-back-buttons': NextBackButtons,
     'input-facade': InputFacade,
     'validation-provider': ValidationProvider,
     'validation-observer' : ValidationObserver
@@ -212,6 +197,9 @@ export default {
           this.$store.commit('formData/updateZip', value)
         }
       }
+    },
+    mounted: function() {
+      this.$refs.addressInput.update(this.$store.state.formData.address);
     },
     data: function () {
       return {

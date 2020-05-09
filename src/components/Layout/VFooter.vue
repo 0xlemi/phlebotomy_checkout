@@ -1,15 +1,15 @@
 <template>
 <div>
   <footer>
-    <div class="w-full pin-b flex bg-gray-800 p-8">
+    <div class="w-full pin-b block md:flex bg-gray-800 p-8">
 
-      <div class="flex-1 text-gray-600 text-left mx-6">
-          <div><a class="hover:text-gray-500" href="#">State Approvals</a></div>
-          <div><a class="hover:text-gray-500" href="#">Careers with PTS</a></div>
-          <div><a class="hover:text-gray-500" href="#">Contact Us</a></div>
+      <div class="flex-1 flex md:block text-gray-600 text-left mx-6 mb-8 md:mb-0 justify-center">
+          <div class="mx-3"><a class="hover:text-gray-500" href="#">State Approvals</a></div>
+          <div class="mx-3"><a class="hover:text-gray-500" href="#">Careers with PTS</a></div>
+          <div class="mx-3"><a class="hover:text-gray-500" href="#">Contact Us</a></div>
       </div>
 
-      <div class="flex-1">
+      <div class="flex-1 mb-8 md:mb-0">
           <div class="flex justify-center my-3">
               <img class=" h-12 rounded-md" src="https://www.phlebotomyusa.com/wp-content/uploads/2017/02/logo.jpg" alt="Phlebotomy USA">
           </div>

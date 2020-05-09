@@ -54,7 +54,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <default-side-bar :current-form="currentForm"></default-side-bar>
+    <side-bar :current-form="currentForm"></side-bar>
 
   </div>
   <!-- End right side of checkout -->
@@ -67,6 +67,10 @@
 import { mapState, mapMutations, mapGetters } from 'vuex'
 
 
+import { setInteractionMode } from 'vee-validate/dist/vee-validate.full.esm';
+
+setInteractionMode('eager');
+
 import ProgressBar from './Elements/ProgressBar.vue'
 import ErrorMessage from './Elements/ErrorMessage.vue'
 
@@ -77,7 +81,7 @@ import FormAddress from './Forms/FormAddress.vue'
 import FormPayment from './Forms/FormPayment.vue'
 import SuccessMessage from './Forms/SuccessMessage.vue'
 
-import DefaultSideBar from './SideBar/DefaultSideBar.vue'
+import SideBar from './SideBar/SideBar.vue'
 
 export default {
   components: {
@@ -90,13 +94,15 @@ export default {
     'form-payment' : FormPayment,
     'success-message' : SuccessMessage,
 
-    'default-side-bar': DefaultSideBar
+    'side-bar': SideBar
   },
   methods: {
     next: function(event) {
       if(this.currentForm <= 4){
         this.$store.commit('checkoutData/incrementCurrentForm');
         this.$emit('changeForm', this.currentForm);
+        // Scroll to the top
+        window.scroll(0,0);
       }
     },
     back: function(event) {

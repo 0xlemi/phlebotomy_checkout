@@ -1,5 +1,5 @@
 <template>
-<div style="cursor:pointer;" :class="[ selected ? selectedClass : unselectedClass ]" class="w-1/2 py-6 pl-6 pr-4 mb-3 mr-6 rounded-lg ">
+<div style="cursor:pointer;" :class="[ selected ? selectedClass : unselectedClass ]" class="md:w-1/2 py-6 pl-6 pr-4 mb-3 mr-6 rounded-lg ">
     <div class="flex">
       <div class="w-4/5 mt-1">
         <h5 :class="[ selected ? 'text-green-900': 'text-red-900' ]" class=" font-semibold text-lg leading-tight truncate"><slot name="title"></slot></h5>
