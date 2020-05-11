@@ -1,10 +1,10 @@
 <template>
 <div class="text-red-800">
 
-  <h3 class="text-3xl font-normal leading-normal mt-2 text-red-900">
+  <h3 class="text-2xl sm:text-3xl font-normal leading-normal mt-2 text-red-900">
     Congratulations
   </h3>
-  <h3 class="text-2xl font-normal leading-normal mt-2 text-red-900">
+  <h3 class="text-xl sm:text-2xl font-normal leading-normal mt-2 text-red-900">
     Your registration has been received.
   </h3>
 

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h3 class="text-3xl font-normal leading-normal mt-2 text-red-900">
+  <h3 class="text-xl font-semibold sm:text-3xl sm:font-normal leading-normal mt-2 text-red-900">
     Student Registration Information
   </h3>
 

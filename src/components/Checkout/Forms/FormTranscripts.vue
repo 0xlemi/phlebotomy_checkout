@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h4 class="text-3xl font-normal leading-normal mt-2 text-red-900">
+  <h4 class="text-xl sm:text-3xl font-normal leading-normal mt-2 text-red-900">
     Official Transcripts
   </h4>
 

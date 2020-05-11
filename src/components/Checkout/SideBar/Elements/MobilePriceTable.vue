@@ -23,31 +23,31 @@
       <tbody>
         <tr v-if="state == 'TN'" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Administrative Fee <span class="font-bold text-xl">*</span></td>
-          <td class="px-4 py-2">$ 100</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>100</td>
         </tr>
         <tr v-if="state == 'TN'" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Registration Fee <span class="font-bold text-xl">*</span></td>
-          <td class="px-4 py-2">$ 150</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>150</td>
         </tr>
         <tr v-if="state == 'TN'" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Books, Supplies and Equipment</td>
-          <td class="px-4 py-2">$ 100</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>100</td>
         </tr>
         <tr class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">{{ name }}</td>
-          <td class="px-4 py-2">$ {{ courseCost - 250 }}</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>{{ courseCost - 250 }}</td>
         </tr>
         <tr v-if="!(state == 'TN') || hasNationalExam" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Exam Fee</td>
-          <td class="px-4 py-2">$ {{ examFeeCost }}</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>{{ examFeeCost }}</td>
         </tr>
         <tr v-if="insuranceCost > 0" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Insurance</td>
-          <td class="px-4 py-2">$ {{ insuranceCost }}</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>{{ insuranceCost }}</td>
         </tr>
         <tr v-if="!payFull" class="bg-pink-200 text-pink-900 border-2 border-pink-300 font-semibold">
           <td class="border-r border-pink-300 border px-4 py-2">Remaining Balance</td>
-          <td class="px-4 py-2">$ {{ remainingBalance }}</td>
+          <td class="px-4 py-2"><span class="hidden sm:inline-block mr-2">$</span>{{ remainingBalance }}</td>
         </tr>
       </tbody>
     </table>
