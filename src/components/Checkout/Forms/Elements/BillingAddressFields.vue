@@ -14,7 +14,7 @@
         <div class="border-red-200 border-b-2">
           <label class="inline-flex items-center w-full">
             <input type="radio" class="focus:outline-red-100 form-radio mx-6 my-5  text-red-400 h-6 w-6" name="billingAddress" v-model="sameBilling" value="true">
-            <span class="ml-3 text-md">Same as Registration Address</span>
+            <span class="ml-3 text-md">Same <span class="hidden sm:inline-block">as Registration</span> Address</span>
           </label>
         </div>
 
