@@ -14,11 +14,12 @@
 
         <div class="w-full mb-3 pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Address
           </label>
 
-            <vue-google-autocomplete id="map" ref="addressInput" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange" classname="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <vue-google-autocomplete id="map" ref="addressInput" placeholder="Start typing address" country="US" @placechanged="getAddressData" @change="changeAction" @inputChange="manualChange" classname="px-3 py-4 placeholder-pink-400 sm:placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
 
         </div>
 
@@ -31,12 +32,20 @@
 
         <div class="w-full md:mb-3 pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Address Field 2 (optional)
           </label>
 
           <validation-provider name="address2" rules="" v-slot="{ errors }">
-            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="Address Field 2 (optional)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -48,41 +57,65 @@
 
 
       <!-- City, State and Zip -->
-      <div class="md:flex mt-4 md:mt-8 pb-3">
+      <div class="md:flex mt-3 md:mt-8 pb-3">
 
-        <div class="md:w-3/6 mb-3 md:mr-6 pt-3 md:pt-0">
+        <div class="md:w-3/6 mb-4 md:mr-6 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             City
           </label>
 
           <validation-provider name="city" rules="required" v-slot="{ errors }">
-            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="City" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input type="text" v-model="city" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
         </div>
 
-        <div class="md:w-1/6 mb-3 md:mr-6 pt-3 md:pt-0">
+        <div class="md:w-1/6 mb-4 md:mr-6 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             State
           </label>
 
           <validation-provider name="state" rules="required|alpha|length:2" v-slot="{ errors }">
-            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="State"  class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
 
         <div class="md:w-2/6 mb-3 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Zip code
           </label>
 
           <validation-provider name="zip code" rules="required|numeric|min:5|max:9" v-slot="{ errors }">
-            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="Zip Code" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input-facade mask="#####  ####" type="text" v-model="zip" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>

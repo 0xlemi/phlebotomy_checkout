@@ -14,13 +14,22 @@
 
         <div class="w-full mb-3 pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Email
           </label>
 
           <validation-provider name="email" rules="required|email" v-slot="{ errors }">
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="Email" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
+
           </validation-provider>
         </div>
 
@@ -28,16 +37,25 @@
       <!-- End email -->
 
       <!-- Name and Lastname -->
-      <div class="flex mt-6">
+      <div class="flex mt-3 sm:mt-6">
 
         <div class="w-2/5 mb-3 mr-6 pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Name
           </label>
 
           <validation-provider name="name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="John" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+
+            <!-- Mobile Version -->
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="Name" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="name" placeholder="John" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -45,12 +63,20 @@
 
         <div class="w-3/5 mb-3 pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Lastname
           </label>
 
           <validation-provider name="last name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Last Name" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
@@ -66,40 +92,64 @@
 
 
       <!-- Number, SSN and DOB -->
-      <div class="md:flex mt-10">
+      <div class="md:flex mt-6 sm:mt-10">
 
         <div class="md:w-2/5 mb-3 md:mr-6 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Number
           </label>
 
           <validation-provider name="number" rules="required|numeric|length:10" v-slot="{ errors }">
-            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(XXX) XXX - XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="Phone Number" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input-facade mask="(###) ### - ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="number" placeholder="(XXX) XXX - XXXX" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>
 
         <div class="md:w-2/5 mb-3 md:mr-6 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             DOB
           </label>
 
           <validation-provider name="DOB" rules="required|numeric|length:8" v-slot="{ errors }">
-            <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="MM / DD / YYYY" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="DOB  (mm/dd/yyyy)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input-facade mask="## / ## / ####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="dob" placeholder="MM / DD / YYYY" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ (errors[0]) ? 'invalid format (mm/dd/yyyy)': ''}}</p>
           </validation-provider>
         </div>
 
         <div class="md:w-1/5 mb-3 pt-3 md:pt-0">
 
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+           <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             SSN  <a class="text-sm text-pink-800 font-normal">(last 4)</a>
           </label>
 
           <validation-provider name="SSN" rules="required|numeric|length:4" v-slot="{ errors }">
-            <input-facade mask="####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="ssn" placeholder="XXXX" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+
+            <!-- Mobile Version -->
+            <input-facade mask="####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="ssn" placeholder="SSN  (last 4 digits)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Mobile Version -->
+
+            <!-- Desktop Version -->
+            <input-facade mask="####" :class="{ 'border-2 border-red-500' : errors.length != 0 }" type="text" v-model="ssn" placeholder="xxxx" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <!-- End Desktop Version -->
+
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
         </div>

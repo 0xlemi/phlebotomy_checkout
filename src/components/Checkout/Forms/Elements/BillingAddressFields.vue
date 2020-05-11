@@ -4,7 +4,7 @@
 
     <div class="w-full mb-3 pt-0">
 
-       <label class="block text-red-900 text-md font-bold ml-2 mb-2">
+       <label class="block text-red-900 text-md font-bold ml-2 mb-4 sm:mb-2">
         Billing address
       </label>
 
@@ -21,7 +21,7 @@
         <div>
           <label class="inline-flex items-center w-full">
             <input type="radio" class="focus:outline-red-100 form-radio mx-6 my-5 text-red-400 h-6 w-6" name="billingAddress" v-model="sameBilling" value="false">
-            <span class="ml-3 text-md">Use a Different Address</span>
+            <span class="ml-3 text-md"><span class="hidden sm:inline-block">Use a</span> Different Address</span>
           </label>
         </div>
         <!-- End Actual Radio Buttons -->

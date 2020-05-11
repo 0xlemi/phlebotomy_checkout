@@ -6,8 +6,9 @@
     <div class="flex text-lg mx-8 my-4">
       <div class="flex-1 flex">
         <zondicon icon="shopping-cart" class="h-6 ml-1 fill-current"/>
-        <p class="md:hidden ml-5">Order Summary</p>
-        <p class="hidden md:block ml-5">Show Order Summary</p>
+        <p class="sm:hidden ml-5">Summary</p>
+        <p class="hidden sm:inline-block md:hidden ml-5">Order Summary</p>
+        <p class="hidden md:inline-block ml-5">Show Order Summary</p>
         <zondicon v-if="!open" icon="cheveron-down" class="ml-3 h-6 fill-current"/>
         <zondicon v-if="open" icon="cheveron-up" class="ml-3 h-6 fill-current"/>
       </div>
