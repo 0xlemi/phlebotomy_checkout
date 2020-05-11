@@ -39,7 +39,7 @@
       <!-- Name and Lastname -->
       <div class="flex mt-3 sm:mt-6">
 
-        <div class="w-full w-5/5 mb-3 pt-0">
+        <div class="w-2/5 mb-3 mr-6 pt-0">
 
            <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Name
@@ -61,15 +61,10 @@
 
         </div>
 
-        <!-- <div class="w-3/5 mb-3 pt-0">
+        <div class="w-3/5 mb-3 pt-0">
 
-<<<<<<< HEAD
            <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Lastname
-=======
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
-            Last Name
->>>>>>> cf586ddb119c4de35607540577fc6e5a1264d788
           </label>
 
           <validation-provider name="last name" rules="required" v-slot="{ errors }">
@@ -85,22 +80,8 @@
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
           </validation-provider>
 
-        </div> -->
-
-      </div>
-      <div class="flex mt-6">
-        <div class="w-full w-5/5 mb-3 pt-0">
-
-           <label class="block text-red-900 text-md font-bold ml-2 mb-2">
-            Last Name
-          </label>
-
-          <validation-provider name="last name" rules="required" v-slot="{ errors }">
-            <input type="text" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="lastName" placeholder="Doe" class="px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
-          </validation-provider>
-
         </div>
+
       </div>
       <!-- End name and Lastname -->
 
