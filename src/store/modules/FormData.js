@@ -269,6 +269,12 @@ const actions = {
         context.commit('responseData/updateTimeEnd', data.course.hours_end, {root:true} );
         context.commit('responseData/updateCity', data.course.city.name, {root:true} );
 
+        // Removing error if there was one before
+        context.commit('errorMessage/updateStatus', false, {root:true} );
+        context.commit('errorMessage/updateType', '', {root:true} );
+        context.commit('errorMessage/updateMessage', '', {root:true} );
+        window.scroll(0,0);
+
         context.commit('checkoutData/incrementCurrentForm', null, {root:true} );
       }
       else{

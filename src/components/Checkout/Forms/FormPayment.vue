@@ -10,6 +10,8 @@
 
     <mobile-price-table class="mt-6 lg:hidden"></mobile-price-table>
 
+    <mobile-information-card class="lg:hidden"></mobile-information-card>
+
     <validation-observer v-slot="{ handleSubmit}">
 
       <national-exam-registration-select v-if="state == 'TN'">
@@ -66,6 +68,7 @@ import BillingFields from './Elements/BillingFields.vue'
 import BillingAddressFields from './Elements/BillingAddressFields.vue'
 import NextBackButtons from './Elements/NextBackButtons.vue'
 import NationalExamRegistrationSelect from './Elements/NationalExamRegistrationSelect.vue'
+import MobileInformationCard from '@/components/Checkout/SideBar/Elements/MobileInformationCard.vue'
 
 export default {
   props: ['loading'],
@@ -77,6 +80,7 @@ export default {
     'billing-address-fields': BillingAddressFields,
     'next-back-buttons': NextBackButtons,
     'national-exam-registration-select': NationalExamRegistrationSelect,
+    'mobile-information-card': MobileInformationCard
   },
   computed: {
     ...mapState('courseInformation', [
