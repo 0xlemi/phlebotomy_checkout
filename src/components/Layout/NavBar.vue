@@ -2,7 +2,7 @@
 <div>
   <nav class="flex items-center justify-between flex-wrap bg-white p-6">
       <div class="flex items-center flex-shrink-0 text-white mr-6 lg:ml-8">
-          <img class=" h-12 " src="https://www.phlebotomyusa.com/wp-content/uploads/2017/02/logo.jpg" alt="Phlebotomy USA">
+          <img class="h-10 sm:h-12" src="https://www.phlebotomyusa.com/wp-content/uploads/2017/02/logo.jpg" alt="Phlebotomy USA">
       </div>
       <!-- <div class="absolute inset-y-0 left-0 flex items-center sm:hidden"> -->
       <div class="lg:hidden block flex w-auto">
