@@ -37,9 +37,9 @@
       <!-- End email -->
 
       <!-- Name and Lastname -->
-      <div class="flex mt-3 sm:mt-6">
+      <div class="md:flex md:mt-3 sm:mt-6">
 
-        <div class="w-2/5 mb-3 mr-6 pt-0">
+        <div class="md:w-2/5 mb-4 md:mr-6 pt-0">
 
            <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Name
@@ -61,7 +61,7 @@
 
         </div>
 
-        <div class="w-3/5 mb-3 pt-0">
+        <div class="md:w-3/5 mb-3 pt-0">
 
            <label class="hidden sm:block text-red-900 text-md font-bold ml-2 mb-2">
             Lastname

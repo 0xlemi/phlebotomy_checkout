@@ -36,18 +36,13 @@
             Address Field 2 (optional)
           </label>
 
-          <validation-provider name="address2" rules="" v-slot="{ errors }">
-
             <!-- Mobile Version -->
-            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="Address Field 2 (optional)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="address2" placeholder="Address Field 2 (optional)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <!-- End Mobile Version -->
 
             <!-- Desktop Version -->
-            <input type="text" v-model="address2" :class="{ 'border-2 border-red-500' : errors.length != 0 }" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" v-model="address2" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <!-- End Desktop Version -->
-
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
-          </validation-provider>
 
         </div>
 
