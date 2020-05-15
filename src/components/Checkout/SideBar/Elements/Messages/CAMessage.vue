@@ -1,12 +1,15 @@
 <template>
 <div>
-  <p class="font-bold text-lg">
-    Thank you for your interest.
-  </p>
-  <p class="mt-6">
-    But you indicated that you do <span class="font-bold">not speak and/or read the English
-    </span>proficiently.
-  </p>
+
+  <div v-if="title">
+    <p class="font-bold text-lg">
+      Thank you for your interest.
+    </p>
+    <p class="mt-6">
+      But you indicated that you do <span class="font-bold">not speak and/or read the English
+      </span>proficiently.
+    </p>
+  </div>
 
   <p class="font-bold mt-8 text-lg ">Here are your options for successful enrollment:</p>
 
@@ -21,5 +24,11 @@
 
 <script>
 export default {
+  props:{
+    title:{
+      type: Boolean,
+      default: true
+    }
+  }
 }
 </script>

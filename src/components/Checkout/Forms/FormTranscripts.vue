@@ -21,16 +21,21 @@
       <h5 :class="[ yes ? 'text-green-900': 'text-red-900' ]" class=" text-lg leading-tight truncate">YES</h5>
     </button>
 
-    <button @click="clickNo" :class="[ no ? 'bg-red-300 font-semibold border-red-500': 'bg-red-100 hover:bg-red-200 border-red-200 hover:border-red-300' ]" class=" focus:outline-none border-2 px-8 py-4 mb-3 mr-6 rounded-lg ">
-      <h5 :class="[ no ? 'text-green-900': 'text-red-900' ]" class="  text-lg leading-tight truncate">NO</h5>
+
+    <!-- Mobile Button -->
+    <button @click="showAlert" :class="[ no ? 'bg-red-300 font-semibold border-red-500': 'bg-red-100 hover:bg-red-200 border-red-200 hover:border-red-300' ]" class="lg:hidden focus:outline-none border-2 px-8 py-4 mb-3 mr-6 rounded-lg ">
+      <h5 :class="[ no ? 'text-green-900': 'text-red-900' ]" class="text-lg leading-tight truncate">NO</h5>
     </button>
+    <!-- End  Mobile Button -->
+
+    <!-- Desktop Button -->
+    <button @click="clickNo" :class="[ no ? 'bg-red-300 font-semibold border-red-500': 'bg-red-100 hover:bg-red-200 border-red-200 hover:border-red-300' ]" class="hidden lg:inline-block focus:outline-none border-2 px-8 py-4 mb-3 mr-6 rounded-lg ">
+      <h5 :class="[ no ? 'text-green-900': 'text-red-900' ]" class="text-lg leading-tight truncate">NO</h5>
+    </button>
+    <!-- End Desktop Button -->
+
   </div>
   <!-- End Buttons -->
-
-
-  <side-message color="red" class="lg:hidden p-8" v-if="!firstTest">
-    <tn-message></tn-message>
-  </side-message>
 
 
   <div class="mx-6 mb-32 lg:mb-0 text-red-800">
@@ -63,6 +68,13 @@ export default {
     ]),
   },
   methods: {
+    showAlert() {
+      // Use sweetalert2
+      this.clickNo();
+      this.$swal('Thank you for your interest.',
+                  'But official transcripts are required by the Tennessee Higher Education Commission.'
+            );
+    },
     clickYes: function (event) {
       this.yes = true;
       this.no = false;

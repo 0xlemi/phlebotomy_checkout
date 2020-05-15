@@ -4,12 +4,15 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+import VueSweetalert2 from 'vue-sweetalert2'
+
 Vue.config.productionTip = false
 
 // Third Party Libraries
 window.axios = require('axios');
 
 Vue.use(require('vue-moment'));
+Vue.use(VueSweetalert2);
 
 
 new Vue({
