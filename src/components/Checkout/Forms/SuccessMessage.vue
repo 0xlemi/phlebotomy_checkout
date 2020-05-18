@@ -67,6 +67,12 @@
     <p class="mt-12 text-lg text-red-900">
       Thank you. We look forward to seeing you soon!
     </p>
+
+    <div>
+      <success-message-sidebar class="mt-10 lg:hidden" color-text="text-red-900" color-text-bold="text-red-900">
+      </success-message-sidebar>
+    </div>
+
   </div>
 
 
@@ -77,7 +83,12 @@
 
 import { mapState } from 'vuex'
 
+import SuccessMessageSideBar from '@/components/Checkout/SideBar/Elements/SuccessMessageSideBar'
+
 export default {
+  components: {
+    'success-message-sidebar': SuccessMessageSideBar
+  },
   computed: {
     ...mapState('responseData', [
       'link',
