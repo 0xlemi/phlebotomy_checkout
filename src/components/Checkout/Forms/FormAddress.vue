@@ -81,18 +81,65 @@
             State
           </label>
 
-          <validation-provider name="state" rules="required|alpha|length:2" v-slot="{ errors }">
 
-            <!-- Mobile Version -->
-            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="State"  class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
-            <!-- Mobile Version -->
+            <div class="relative">
+              <select v-model="state" class="block appearance-none w-full bg-white text-red-900 py-4 px-4 pr-8 rounded leading-tight focus:outline-none shadow focus:bg-white focus:border-red-900" id="grid-state">
+                <option>AL</option>
+                <option>AK</option>
+                <option>AZ</option>
+                <option>AR</option>
+                <option>CA</option>
+                <option>CO</option>
+                <option>CT</option>
+                <option>DE</option>
+                <option>FL</option>
+                <option>GA</option>
+                <option>HI</option>
+                <option>ID</option>
+                <option>IL</option>
+                <option>IN</option>
+                <option>IA</option>
+                <option>KS</option>
+                <option>KY</option>
+                <option>LA</option>
+                <option>ME</option>
+                <option>MD</option>
+                <option>MA</option>
+                <option>MI</option>
+                <option>MN</option>
+                <option>MS</option>
+                <option>MO</option>
+                <option>MT</option>
+                <option>NE</option>
+                <option>NV</option>
+                <option>NH</option>
+                <option>NJ</option>
+                <option>NM</option>
+                <option>NY</option>
+                <option>NC</option>
+                <option>ND</option>
+                <option>OH</option>
+                <option>OK</option>
+                <option>OR</option>
+                <option>PA</option>
+                <option>RI</option>
+                <option>SC</option>
+                <option>SD</option>
+                <option>TN</option>
+                <option>TX</option>
+                <option>UT</option>
+                <option>VT</option>
+                <option>VA</option>
+                <option>WA</option>
+                <option>WV</option>
+                <option>WI</option>
+                <option>WY</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current text-red-900 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+            </div>
 
-            <!-- Desktop Version -->
-            <input-facade mask="AA" type="text" v-model="state" :class="{ 'border-2 border-red-500' : errors.length != 0 }"  class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
-            <!-- End Desktop Version -->
-
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
-          </validation-provider>
         </div>
 
         <div class="md:w-2/6 mb-3 pt-3 md:pt-0">
