@@ -182,7 +182,7 @@ import { mapState, mapMutations } from 'vuex'
 import NextBackButtons from './Elements/NextBackButtons.vue'
 
 import { InputFacade } from 'vue-input-facade'
-import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider, Validator } from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
 
 
@@ -251,6 +251,46 @@ export default {
         this.$store.commit('formData/updateSsn', value)
       }
     }
+  },
+  mounted() {
+
+    // const isUnique =
+    // axios.get(process.env.VUE_APP_API_URL+'api/student/'+ this.email +'/verify')
+    //   .then((response) => {
+    //     return resolve({
+    //       valid: response.data.exists,
+    //       data: {
+    //           message: `that email is already taken.`
+    //         }
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     return resolve({
+    //       valid: true
+    //     });
+    //   });
+    // const isUnique = value =>
+    //   new Promise(resolve => {
+    //     setTimeout(() => {
+    //       if (emailsDB.indexOf(value) === -1) {
+    //         return resolve({
+    //           valid: true
+    //         });
+    //       }
+    //
+    //       return resolve({
+    //         valid: false,
+    //         data: {
+    //           message: `${value} is already taken.`
+    //         }
+    //       });
+    //     }, 200);
+    //   });
+
+    // Validator.extend("unique", {
+    //   validate: isUnique,
+    //   getMessage: (field, params, data) => data.message
+    // });
   }
 }
 </script>

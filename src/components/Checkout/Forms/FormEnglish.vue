@@ -62,6 +62,7 @@ export default {
       this.$swal('Thank you for your interest.',
                   'But is a requirement that you speak and/or read the English proficiently.'
           );
+      window.scrollBy(0, 500);
     },
     clickYes: function (event) {
       this.yes = true;

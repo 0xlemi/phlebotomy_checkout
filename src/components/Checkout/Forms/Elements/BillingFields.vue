@@ -33,7 +33,7 @@
         Exp.
       </label>
 
-      <validation-provider name="expiration" rules="required|numeric|length:4" v-slot="{ errors }">
+      <validation-provider name="expiration" rules="required|numeric" v-slot="{ errors }">
 
         <!-- Mobile Version -->
         <input-facade mask="## / ##" type="text" v-model="exp" :class="{ 'border-2 border-red-500' : errors.length != 0 }" placeholder="Exp  (mm/yy)" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
@@ -104,8 +104,14 @@
 import {  mapGetters } from 'vuex'
 
 import { InputFacade } from 'vue-input-facade';
-import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider, extend } from 'vee-validate/dist/vee-validate.full.esm';
 
+
+extend('notExp', value => {
+  return false;
+  // return new Date(this.explodedExp).valueOf() > new Date().valueOf();
+});
+console.log(this);
 export default {
   components: {
     'input-facade': InputFacade,
@@ -113,7 +119,8 @@ export default {
   },
   computed: {
     ...mapGetters('formData', [
-      'cardType'
+      'cardType',
+      'explodedExp'
     ]),
     billingName: {
       get () {
@@ -148,6 +155,9 @@ export default {
       }
     }
   }
+  // mounted: {
+  //
+  // }
 }
 </script>
 
