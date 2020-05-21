@@ -6,25 +6,25 @@ const state = {
   firstTest: true,
 
   // ***** Form2 *******
-  name: 'pepe',
-  lastName: 'Gonzales',
-  email: 'pepe@gmail.com',
-  number: '2340982348',
-  dob: '03221993',
-  ssn: '1234',
+  name: 'jon',
+  lastName: 'sanchez',
+  email: 'jon@example.com',
+  number: '8278384782',
+  dob: '28489283',
+  ssn: '2834',
 
   // ***** Form3 *******
-  address: '1234 Santa Monica',
-  address2: 'Santa M. Condo',
+  address: '1238 Santa Monica',
+  address2: 'Drive 123',
   city: 'San Antonio',
   state: 'TX',
-  zip: '78201',
+  zip: '23404',
 
   // ***** Form4 *******
   payFull: false,
   billingName: 'jon sanchez',
   billingNumber: '4111111111111111',
-  exp: '0322',
+  exp: '0321',
   code: '123',
   // type is in getter
   sameBilling: "true", // Is easier to use a string for radio buttons

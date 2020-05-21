@@ -1,7 +1,7 @@
 <template>
 
 <div class="text-gray-700">
-  <table class="table-fixed">
+  <table class="table-fixed w-full">
     <thead>
       <tr>
         <th class="w-3/4 px-4 py-2">Concept</th>
