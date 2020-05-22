@@ -9,7 +9,14 @@
       <tn-message></tn-message>
     </side-message>
 
-    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5"></price-table>
+    <div v-if="((courseState == 'TN') && !availableForPayment)">
+
+    </div>
+    <div v-else>
+      <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5"></price-table>
+    </div>
+
+
 
     <information-card :currentForm="currentForm"></information-card>
 
@@ -44,6 +51,7 @@ export default {
     ...mapState('courseInformation', {
       valid: 'valid',
       courseState: 'state',
+      availableForPayment: 'availableForPayment'
     }),
   }
 }
