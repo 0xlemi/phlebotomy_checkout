@@ -6,8 +6,7 @@
 
   <hr class="border-red-300 mt-5">
 
-
-  <validation-observer v-slot="{ handleSubmit}">
+  <validation-observer ref="formBasic" v-slot="{ handleSubmit}">
 
       <!-- Email -->
       <div class="flex mt-8">
@@ -21,11 +20,11 @@
           <validation-provider name="email" rules="required|email" v-slot="{ errors }">
 
             <!-- Mobile Version -->
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="Email" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" @blur="onBlurEmail"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="Email" class="sm:hidden px-3 py-4 placeholder-pink-400 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <!-- End Mobile Version -->
 
             <!-- Desktop Version -->
-            <input type="text"  :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
+            <input type="text" @blur="onBlurEmail" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <!-- End Desktop Version -->
 
             <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
@@ -182,8 +181,9 @@ import { mapState, mapMutations } from 'vuex'
 import NextBackButtons from './Elements/NextBackButtons.vue'
 
 import { InputFacade } from 'vue-input-facade'
-import { ValidationProvider, Validator } from 'vee-validate/dist/vee-validate.full.esm';
+import { ValidationProvider} from 'vee-validate/dist/vee-validate.full.esm';
 import { ValidationObserver } from 'vee-validate';
+
 
 
 export default {
@@ -195,11 +195,48 @@ export default {
     'validation-observer' : ValidationObserver
   },
   methods: {
-    onSubmit: function () {
-      this.$emit('next');
+    async onSubmit() {
+      try {
+
+        const errors = this.$refs.formBasic.errors;
+          if(errors.email.length == 0){
+            this.$emit('next');
+          }
+          else{
+            await this.$refs.formBasic.setErrors({
+              email: ['This email is already taken']
+            });
+          }
+
+
+      } catch (error) {
+        console.log(error);
+      }
+
     },
-    back: function (){
+    back(){
       this.$emit('back');
+    },
+    async onBlurEmail(e){
+
+      //console.log('blur');
+      //console.log(this.$refs.formBasic.validate());
+      try {
+        const { data } = await axios.get(process.env.VUE_APP_API_URL+'api/student/'+ e.target.value +'/verify');
+
+          if(data.exists){
+            await this.$refs.formBasic.setErrors({
+              email: ['This email is already taken']
+            });
+          }
+
+      } catch (error) {
+        //console.log(error);
+      }
+
+
+      ;
+
     }
   },
   computed: {
@@ -253,6 +290,7 @@ export default {
     }
   },
   mounted() {
+
 
     // const isUnique =
     // axios.get(process.env.VUE_APP_API_URL+'api/student/'+ this.email +'/verify')
