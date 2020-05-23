@@ -10,10 +10,10 @@
     </thead>
     <tbody v-if="state == 'TN' && !availableForPayment && courseCost >  0">
       <tr>
-        <td class="border px-4 py-2">Due Before Class Starts</td>
+        <td class="border px-4 py-2">Deposit</td>
         <td class="border px-4 py-2">$ {{ 100 }}</td>
         <tr class="bg-blue-100 text-blue-800 font-semibold">
-          <td class="border px-4 py-2">Remaining Balance</td>
+          <td class="border px-4 py-2">Due Before Class Starts</td>
           <td class="border px-4 py-2">$ {{ totalPrice - 100 }}</td>
         </tr>
       </tr>

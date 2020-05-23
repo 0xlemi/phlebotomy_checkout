@@ -26,11 +26,11 @@
     <table class="w-full mb-10 text-red-900">
       <tbody v-if="state == 'TN' && !availableForPayment && courseCost > 0">
         <tr class="border-b border-red-200">
-          <td class="border-r border-red-200 px-4 py-2">Due Before Class Starts</td>
+          <td class="border-r border-red-200 px-4 py-2">Deposit</td>
           <td class="px-4 py-2"><span class="mr-1">$</span>{{ 100 }}</td>
         </tr>
         <tr class="bg-pink-200 text-pink-900 border-2 border-pink-300 font-semibold">
-          <td class="border-r border-pink-300 border px-4 py-2">Remaining Balance</td>
+          <td class="border-r border-pink-300 border px-4 py-2">Due Before Class Starts</td>
           <td class="px-4 py-2"><span class="mr-1">$</span>{{ totalPrice - 100 }}</td>
         </tr>
       </tbody>
