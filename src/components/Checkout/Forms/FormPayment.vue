@@ -17,7 +17,19 @@
       <national-exam-registration-select v-if="state == 'TN'">
       </national-exam-registration-select>
 
-      <div v-if="!(state == 'TN') || availableForPayment">
+
+      <div v-if="state == 'TN'">
+        <div v-if="availableForPayment && courseCost >  0">
+
+          <deposit-full-select></deposit-full-select>
+
+          <billing-fields></billing-fields>
+
+          <billing-address-fields></billing-address-fields>
+
+        </div>
+      </div>
+      <div v-else>
 
         <deposit-full-select></deposit-full-select>
 
@@ -48,7 +60,7 @@
       <!-- End Terms of Service -->
 
 
-      <next-back-buttons :next-blocked="!ready" :loading="loading" next-text="Pay Now" v-on:next="handleSubmit(onSubmit)" v-on:back="back">
+      <next-back-buttons :next-blocked="!ready" :loading="loading" :next-text="buttonText" v-on:next="handleSubmit(onSubmit)" v-on:back="back">
       </next-back-buttons>
 
   </validation-observer>
@@ -86,14 +98,21 @@ export default {
     ...mapState('courseInformation', [
       'state',
       'termsOfServiceLink',
+      'examDates',
       'availableForPayment',
-      'examDates'
+      'courseCost'
     ]),
     ...mapGetters('courseInformation', [
       'hasSecondQuestion',
     ]),
     ready: function() {
       return ((this.secondQuestion || !this.hasSecondQuestion) && this.termsOfService && !this.loading)
+    },
+    buttonText: function() {
+      if (this.state == 'TN' && !this.availableForPayment) {
+        return 'Sign Up Now';
+      }
+      return 'Pay Now';
     }
   },
   methods: {

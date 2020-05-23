@@ -8,7 +8,23 @@
         <th class="w-1/4 px-4 py-2">Cost</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="state == 'TN' && !availableForPayment && courseCost >  0">
+      <tr>
+        <td class="border px-4 py-2">Due Before Class Starts</td>
+        <td class="border px-4 py-2">$ {{ 100 }}</td>
+        <tr class="bg-blue-100 text-blue-800 font-semibold">
+          <td class="border px-4 py-2">Remaining Balance</td>
+          <td class="border px-4 py-2">$ {{ totalPrice - 100 }}</td>
+        </tr>
+      </tr>
+    </tbody>
+    <tbody v-else-if="courseCost == 0">
+      <tr>
+        <td class="border px-4 py-2">Total</td>
+        <td class="border px-4 py-2">$ {{ totalPrice }}</td>
+      </tr>
+    </tbody>
+    <tbody v-else>
       <tr v-if="state == 'TN'">
         <td class="border px-4 py-2">Administrative Fee <span class="font-bold text-xl">*</span></td>
         <td class="border px-4 py-2">$ 100</td>
@@ -23,7 +39,7 @@
       </tr>
       <tr>
         <td class="border px-4 py-2">{{ name }}</td>
-        <td class="border px-4 py-2">$ {{ courseCost - 250 }}</td>
+        <td class="border px-4 py-2">$ {{ courseCost }}</td>
       </tr>
       <tr v-if="!(state == 'TN') || hasNationalExam">
         <td class="border px-4 py-2">Exam Fee</td>
@@ -64,11 +80,12 @@ export default {
       'courseCost',
       'examFeeCost',
       'insuranceCost',
-      'depositAmount'
+      'depositAmount',
+      'availableForPayment'
     ]),
     ...mapGetters('courseInformation', [
       'remainingBalance',
-      'totalPrice'
+      'totalPrice',
     ]),
     ...mapState('formData', [
       'payFull',

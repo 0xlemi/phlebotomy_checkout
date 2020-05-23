@@ -202,7 +202,8 @@ const actions = {
   submitData: async function(context) {
     let isTN = context.rootState.courseInformation.state == 'TN';
     if(isTN){
-      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/tn_registration_payment/process');
+      // this.state == 'TN' && !this.availableForPayment
+      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/tn_registration/process/' + context.rootState.courseInformation.id);
     }else{
       context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/registration/process');
     }

@@ -13,7 +13,10 @@
         <zondicon v-if="open" icon="cheveron-up" class="ml-3 h-6 fill-current"/>
       </div>
       <div class="flex font-bold right-0">
-        <p class="">$ {{ payFull ? totalPrice : depositAmount }}</p>
+
+        <p v-if="state == 'TN' && !availableForPayment && courseCost >  0" class="">$ 100</p>
+        <p v-else-if="courseCost == 0" class="">$ 0</p>
+        <p v-else class="">$ {{ payFull ? totalPrice : depositAmount }}</p>
       </div>
     </div>
   </div>
@@ -21,7 +24,23 @@
 
   <div v-if="open" class="-mx-8">
     <table class="w-full mb-10 text-red-900">
-      <tbody>
+      <tbody v-if="state == 'TN' && !availableForPayment && courseCost > 0">
+        <tr class="border-b border-red-200">
+          <td class="border-r border-red-200 px-4 py-2">Due Before Class Starts</td>
+          <td class="px-4 py-2"><span class="mr-1">$</span>{{ 100 }}</td>
+        </tr>
+        <tr class="bg-pink-200 text-pink-900 border-2 border-pink-300 font-semibold">
+          <td class="border-r border-pink-300 border px-4 py-2">Remaining Balance</td>
+          <td class="px-4 py-2"><span class="mr-1">$</span>{{ totalPrice - 100 }}</td>
+        </tr>
+      </tbody>
+      <tbody v-else-if="courseCost == 0">
+        <tr class="border-b border-red-200">
+          <td class="border-r border-red-200 px-4 py-2">Total</td>
+          <td class="px-4 py-2"><span class="mr-1">$</span>0</td>
+        </tr>
+      </tbody>
+      <tbody v-else>
         <tr v-if="state == 'TN'" class="border-b border-red-200">
           <td class="border-r border-red-200 px-4 py-2">Administrative Fee <span class="font-bold text-xl">*</span></td>
           <td class="px-4 py-2"><span class="mr-1">$</span>100</td>
@@ -74,6 +93,7 @@ export default {
       'courseCost',
       'examFeeCost',
       'insuranceCost',
+      'availableForPayment',
       'depositAmount'
     ]),
     ...mapGetters('courseInformation', [

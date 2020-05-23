@@ -44,7 +44,7 @@
                 {{ dateStart |  moment('L') }} - {{dateEnd | moment('L') }}
               </p>
               <p>{{ city }}</p>
-              <p>{{ timeStart }} - {{ timeEnd }}</p>
+              <p>{{ formattedTimes }}</p>
             </div>
           </div>
 
@@ -95,6 +95,9 @@ export default {
       'timeStart',
       'timeEnd',
       'city'
+    ]),
+    ...mapState('courseInformation', [
+      'formattedTimes',
     ])
   }
 }
