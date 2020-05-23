@@ -14,7 +14,7 @@
       </div>
       <div class="flex font-bold right-0">
 
-        <p v-if="state == 'TN' && !availableForPayment && courseCost >  0" class="">$ 100</p>
+        <p v-if="state == 'TN' && !availableForPayment && courseCost >  0" class="">$ 0</p>
         <p v-else-if="courseCost == 0" class="">$ 0</p>
         <p v-else class="">$ {{ payFull ? totalPrice : depositAmount }}</p>
       </div>

@@ -77,8 +77,6 @@ const actions = {
               context.dispatch('loadExamDates', courseId);
             }else if (state.state == 'CA') {
 
-            }else {
-              context.commit('checkoutData/updateCurrentForm', 2, {root:true} );
             }
 
             // ***************** Comented out for testing ***************88

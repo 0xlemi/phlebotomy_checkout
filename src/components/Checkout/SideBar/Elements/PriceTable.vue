@@ -55,7 +55,7 @@
         <td class="border px-4 py-2">$ {{ totalPrice }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-gray-100 text-gray-800 font-semibold">
-        <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(depositAmount)</span></td>
+        <td class="border px-4 py-2">Total<span class="ml-2 font-normal">(deposit only)</span></td>
         <td class="border px-4 py-2">$ {{ depositAmount }}</td>
       </tr>
       <tr v-if="!payFull" class="bg-blue-100 text-blue-800 font-semibold">
