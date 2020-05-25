@@ -9,6 +9,8 @@ const state = {
   examFeeCost: null,
   insuranceCost: null,
   depositAmount: null,
+  // Success Page
+  formattedTimes: null,
   // TN Specific
   availableForPayment: false,
   examDates: {
@@ -25,7 +27,14 @@ const getters = {
 
 
   totalPrice: (state, getters, rootState) => {
-    return state.courseCost + state.examFeeCost + state.insuranceCost +  (rootState.formData.hasNationalExam ? 100 : 0);
+    if (state.state == 'CA') {
+      return state.courseCost + state.examFeeCost + state.insuranceCost;
+    }else if (state.state == 'TN') {
+      return state.courseCost + state.examFeeCost + state.insuranceCost;
+    }else {
+      return state.courseCost + state.examFeeCost + state.insuranceCost;
+      // return state.courseCost + state.examFeeCost + state.insuranceCost +  (rootState.formData.hasNationalExam ? 100 : 0);
+    }
   },
   remainingBalance:(state, getters) => {
     return getters.totalPrice - state.depositAmount;
@@ -60,10 +69,14 @@ const actions = {
             state.insuranceCost = data.insurance_cost;
             state.depositAmount = data.deposit;
 
+            state.formattedTimes = data.formatted_times;
+
 
             if (state.state == 'TN') {
               state.availableForPayment = data.available_for_payment;
               context.dispatch('loadExamDates', courseId);
+            }else if (state.state == 'CA') {
+
             }
 
             // ***************** Comented out for testing ***************88

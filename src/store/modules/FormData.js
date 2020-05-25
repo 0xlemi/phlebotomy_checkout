@@ -6,26 +6,26 @@ const state = {
   firstTest: true,
 
   // ***** Form2 *******
-  name: 'jon',
-  lastName: 'sanchez',
-  email: 'jon@example.com',
-  number: '8278384782',
-  dob: '28489283',
-  ssn: '2834',
+  name: '',
+  lastName: '',
+  email: '',
+  number: '',
+  dob: '',
+  ssn: '',
 
   // ***** Form3 *******
-  address: '1238 Santa Monica',
-  address2: 'Drive 123',
-  city: 'San Antonio',
-  state: 'TX',
-  zip: '23404',
+  address: '',
+  address2: '',
+  city: '',
+  state: '',
+  zip: '',
 
   // ***** Form4 *******
   payFull: false,
-  billingName: 'jon sanchez',
-  billingNumber: '4111111111111111',
-  exp: '0321',
-  code: '123',
+  billingName: '',
+  billingNumber: '',
+  exp: '',
+  code: '',
   // type is in getter
   sameBilling: "true", // Is easier to use a string for radio buttons
   billingAddress1: '',
@@ -202,7 +202,8 @@ const actions = {
   submitData: async function(context) {
     let isTN = context.rootState.courseInformation.state == 'TN';
     if(isTN){
-      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/tn_registration_payment/process');
+      // this.state == 'TN' && !this.availableForPayment
+      context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/tn_registration/process/' + context.rootState.courseInformation.id);
     }else{
       context.dispatch('basicRequest', process.env.VUE_APP_API_URL+'api/registration/process');
     }
