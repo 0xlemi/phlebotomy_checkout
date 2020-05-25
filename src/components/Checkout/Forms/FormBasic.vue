@@ -26,8 +26,18 @@
             <!-- Desktop Version -->
             <input type="text" @blur="onBlurEmail" :class="{ 'border-2 border-red-500' : errors.length != 0 }" v-model="email" placeholder="example@gmail.com" class="hidden sm:block px-3 py-4 placeholder-red-300 text-red-900 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-red-200 w-full"/>
             <!-- End Desktop Version -->
+            <p
+              class="mt-1 ml-1 text-red-500 text-sm font-semibold italic"
+              v-if="errors[0] == 'This email is already taken'"
+              >
+              Looks like you already have an account,
+              please <a href="https://students.phlebotomyusa.com"><u>click here to login</u></a>
+              and manage your enrollments
+            </p>
+            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic" v-else>{{ errors[0]}}</p>
 
-            <p class="mt-1 ml-1 text-red-500 text-sm font-semibold italic">{{ errors[0]}}</p>
+
+
 
           </validation-provider>
         </div>
@@ -221,21 +231,25 @@ export default {
 
       //console.log('blur');
       //console.log(this.$refs.formBasic.validate());
-      try {
-        const { data } = await axios.get(process.env.VUE_APP_API_URL+'api/student/'+ e.target.value +'/verify');
+      const email = e.target.value;
+      const validEmail = /\S+@\S+\.\S+/.test(email);
+      const url =
+      console.log(validEmail);
+      if(validEmail){
+        try {
+          const { data } = await axios.get(process.env.VUE_APP_API_URL+'api/student/'+ e.target.value +'/verify');
 
-          if(data.exists){
-            await this.$refs.formBasic.setErrors({
-              email: ['This email is already taken']
-            });
-          }
+            if(data.exists){
+              await this.$refs.formBasic.setErrors({
+                email: [`This email is already taken`]
+              });
+            }
 
-      } catch (error) {
-        //console.log(error);
+        } catch (error) {
+          //console.log(error);
+        }
       }
 
-
-      ;
 
     }
   },
