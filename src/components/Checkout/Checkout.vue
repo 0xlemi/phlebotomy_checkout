@@ -54,7 +54,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <side-bar :current-form="currentForm" :num-form="numForms"></side-bar>
+    <side-bar :current-form="currentForm" :num-forms="numForms"></side-bar>
 
   </div>
   <!-- End right side of checkout -->
