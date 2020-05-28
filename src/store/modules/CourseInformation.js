@@ -77,6 +77,9 @@ const actions = {
               context.dispatch('loadExamDates', courseId);
             }else if (state.state == 'CA') {
 
+            }else {
+              // if there is anything else we need one less step for the form
+              context.commit('checkoutData/updateNumForm', 4, {root:true} );
             }
 
             // ***************** Comented out for testing ***************88

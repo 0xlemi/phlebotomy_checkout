@@ -1,22 +1,22 @@
 <template>
 <div v-if="valid">
 
-    <side-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'CA')">
+    <side-message class="p-8" v-if="!firstTest && (currentForm == numForms - 4 && courseState == 'CA')">
       <ca-message></ca-message>
     </side-message>
 
-    <side-message class="p-8" v-if="!firstTest && (currentForm == 1 && courseState == 'TN')">
+    <side-message class="p-8" v-if="!firstTest && (currentForm == numForms - 4 && courseState == 'TN')">
       <tn-message></tn-message>
     </side-message>
 
 
-    <price-table class="py-8" v-if="currentForm > 1 && currentForm < 5"></price-table>
+    <price-table class="py-8" v-if="currentForm > numForms - 4 && currentForm < numForms"></price-table>
 
 
 
-    <information-card :currentForm="currentForm"></information-card>
+    <information-card :currentForm="currentForm" :numForms="numForms"></information-card>
 
-    <success-message-side-bar v-if="currentForm == 5" class="p-8"></success-message-side-bar>
+    <success-message-side-bar v-if="currentForm == numForms" class="p-8"></success-message-side-bar>
 </div>
 </template>
 
@@ -31,7 +31,7 @@ import SuccessMessageSideBar from './Elements/SuccessMessageSideBar.vue'
 import InformationCard from './Elements/InformationCard.vue'
 
 export default {
-  props: ['currentForm'],
+  props: ['currentForm', 'numForms'],
   components: {
     'side-message' : SideMessage,
     'ca-message' : CAMessage,

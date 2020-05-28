@@ -1,6 +1,7 @@
 // initial state
 const state = {
   currentForm: 1,
+  numForms: 5,
   loading: false
 }
 
@@ -29,6 +30,9 @@ const mutations = {
   },
   updateLoading(state, payload) {
     state.loading = payload;
+  },
+  updateNumForm(state, payload) {
+    state.numForms = payload;
   }
 
 }

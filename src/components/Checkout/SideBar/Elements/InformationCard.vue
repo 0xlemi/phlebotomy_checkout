@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentForm > 2" :class="[ (currentForm == 5) ? ' pt-6' : 'py-4 pb-10']" class="px-5">
+  <div v-if="currentForm > numForms - 3" :class="[ (currentForm == numForms) ? ' pt-6' : 'py-4 pb-10']" class="px-5">
     <div  class=" w-full p-4 bg-gray-200 text-gray-600 border-gray-400 border rounded-lg ">
       <p class=" text-gray-700 text-lg leading-tight truncate">
         Review your Information
@@ -17,7 +17,7 @@
         <span class="">{{ ssn }}</span>
       </p>
       <!-- address info -->
-      <div v-if="currentForm > 3">
+      <div v-if="currentForm > numForms - 2">
         <p class=" mt-6 text-gray-700 text-md leading-tight truncate">
           {{ address }}
         </p>
@@ -32,7 +32,7 @@
         </p>
       </div>
       <!-- payment info -->
-      <div v-if="currentForm > 4">
+      <div v-if="currentForm > numForms - 1">
         <p class="mt-5 -mb-2 text-sm">If this information is wrong <span class="font-bold">edit in your account</span></p>
       </div>
     </div>
@@ -44,7 +44,7 @@
 import { mapState, mapGetters } from 'vuex'
 
 export default {
-  props: ['currentForm', 'mapGetters'],
+  props: ['currentForm', 'numForms', 'mapGetters'],
   computed: {
     ...mapState('formData', {
       firstTest: 'firstTest',

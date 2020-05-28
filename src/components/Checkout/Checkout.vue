@@ -14,28 +14,28 @@
     <div v-else-if="valid == 'finished'"> -->
     <div v-if="valid">
 
-      <progress-bar :step="currentForm" :number-steps="4" class="mx-8 my-6"></progress-bar>
+      <progress-bar :step="currentForm" :number-steps="numForms - 1" class="mx-8 my-6"></progress-bar>
 
 
       <div class="mx-8 mt-8">
 
-        <form-english v-if="currentForm == 1 && state == 'CA'" v-on:next="next"></form-english>
+        <form-english v-if="currentForm == numForms - 4 && state == 'CA'" v-on:next="next"></form-english>
 
-        <form-transcripts v-if="currentForm == 1 && state == 'TN'" v-on:next="next"></form-transcripts>
+        <form-transcripts v-if="currentForm == numForms - 4 && state == 'TN'" v-on:next="next"></form-transcripts>
 
-        <div class="hidden lg:block h-56" v-if="currentForm == 1">
+        <div class="hidden lg:block h-56" v-if="currentForm == numForms - 4">
         </div>
 
-        <form-basic v-if="currentForm == 2" :has-intro-question="this.hasIntroQuestion" v-on:next="next" v-on:back="back" ></form-basic>
+        <form-basic v-if="currentForm == numForms - 3" :has-intro-question="this.hasIntroQuestion" v-on:next="next" v-on:back="back" ></form-basic>
 
-        <form-address v-if="currentForm == 3"v-on:next="next" v-on:back="back" ></form-address>
+        <form-address v-if="currentForm == numForms - 2"v-on:next="next" v-on:back="back" ></form-address>
 
         <div>
-          <form-payment v-if="currentForm == 4" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
+          <form-payment v-if="currentForm == numForms - 1" :loading="loading" v-on:next="submit" v-on:back="back" ></form-payment>
         </div>
 
 
-        <success-message v-if="currentForm == 5"></success-message>
+        <success-message v-if="currentForm == numForms"></success-message>
 
       </div>
 
@@ -54,7 +54,7 @@
   <!-- Right side of checkout -->
   <div class="hidden lg:block w-2/5">
 
-    <side-bar :current-form="currentForm"></side-bar>
+    <side-bar :current-form="currentForm" :num-form="numForms"></side-bar>
 
   </div>
   <!-- End right side of checkout -->
@@ -119,7 +119,8 @@ export default {
   computed: {
     ...mapState('checkoutData', [
       'loading',
-      'currentForm'
+      'currentForm',
+      'numForms'
     ]),
     ...mapState('courseInformation', [
       'valid',
